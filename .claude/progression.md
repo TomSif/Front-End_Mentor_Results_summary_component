@@ -182,8 +182,8 @@
 - Coverage: 100% sur utils
 
 **Commits:**
-- Total: 8
-- Dernier: fix: align feedback levels with design requirements
+- Total: 11
+- Dernier: feat: add default scores data with design values
 
 ---
 
@@ -346,24 +346,81 @@ Un seul fichier `types/index.ts` pour éviter la duplication
 
 ---
 
-### 🔜 Session 3 - À venir
+### 2025-11-02 - Session 3: Phase 3 - Composants React + Interactivité 🚧
 
-**Phase 3: Composants React + Storybook**
+#### Innovation : Application interactive au lieu de statique
 
-Prochains composants à créer:
-1. Button - Composant générique réutilisable
-2. ScoreCircle - Cercle avec le score
-3. ResultFeedback - Titre et message
-4. SummaryItem - Ligne d'une catégorie
-5. SummaryList - Liste des 4 catégories
-6. ResultCard & SummaryPanel - Containers
+**Décision prise par Tom :**
+Transformer le projet en application interactive où l'utilisateur peut modifier les scores.
 
-Pour chaque composant:
-- ✅ Composant React + TypeScript
-- ✅ Styles SASS (modules)
-- ✅ Story Storybook
-- ✅ Tests visuels
+**Pourquoi cette décision est excellente :**
+- ✅ Exploite vraiment les fonctions utils créées (calculateScore, getFeedback)
+- ✅ Ajoute de l'apprentissage React state management
+- ✅ Rend le projet unique et plus engageant
+- ✅ Crée un composant réutilisable (InputScore)
+
+**Architecture ajustée :**
+```
+App (State global: scores avec useState)
+├── ResultCard
+│   ├── ScoreCircle (score dynamique recalculé)
+│   └── ResultFeedback (feedback dynamique)
+└── SummaryPanel
+    ├── SummaryList
+    │   └── InputScore × 4 (inputs éditables)
+    └── Button
+```
+
+**Nouveaux apprentissages ajoutés :**
+- useState pour gérer l'état des scores
+- Controlled components (inputs contrôlés par React)
+- Props drilling (passer onScoreChange)
+- Event handling (onChange sur inputs)
+- Immutabilité avec .map()
+
+#### Fichier defaultScores.ts créé ✅
+
+**Fichier:** `src/data/defaultScores.ts`
+
+**Contenu:**
+- `DEFAULT_SCORES`: Valeurs initiales du design (80, 92, 61, 72)
+  * Score calculé initial: 76
+  * Feedback initial: "Great"
+- `CATEGORY_COLORS`: Mapping des couleurs HSL par catégorie
+  * Reaction: Light red, Memory: Orangey yellow
+  * Verbal: Green teal, Visual: Cobalt blue
+
+**Concepts appris:**
+- Export de constantes (`export const`)
+- Typage strict (`: ScoreData`)
+- `as const` pour readonly et inférence exacte
+- Convention MAJUSCULES pour constantes globales
+- Chemins absolus (`/assets/` → `public/assets/`)
+- Séparation données/logique
+
+**Commit:** `feat: add default scores data with design values`
 
 ---
 
-*Dernière mise à jour: 2025-11-02 (Session 2 terminée - Types & Utils)*
+### 🔜 Prochaines étapes Session 3
+
+**Composants à créer (ordre ajusté) :**
+1. ✅ defaultScores.ts - Données initiales
+2. ⏳ Button - Composant simple pour apprendre le workflow
+3. ⏳ InputScore - Composant clé avec input contrôlé
+4. ⏳ SummaryList - Map sur InputScore
+5. ⏳ ScoreCircle - Affichage dynamique du score
+6. ⏳ ResultFeedback - Affichage dynamique du feedback
+7. ⏳ ResultCard - Container gauche
+8. ⏳ SummaryPanel - Container droit
+9. ⏳ App.tsx - State management final
+
+**Pour chaque composant:**
+- Composant React + TypeScript
+- Styles SASS (modules)
+- Story Storybook
+- Commit + Doc
+
+---
+
+*Dernière mise à jour: 2025-11-02 (Session 3 démarrée - defaultScores.ts)*
