@@ -1,0 +1,74 @@
+/**
+ * Styles du composant Button
+ *
+ * Utilise les variables définies dans styles/variables.scss
+ * et les mixins de styles/mixins.scss
+ */
+
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.button {
+  // Reset des styles par défaut du navigateur
+  border: none;
+  cursor: pointer;
+  font-family: $font-family;
+  font-size: $font-size-body;
+  font-weight: $font-weight-bold;
+
+  // Layout
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-lg;
+
+  // Transition pour les effets hover
+  transition: background-color 0.2s ease-in-out;
+
+  // État désactivé
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+/**
+ * Variante Primary (par défaut)
+ * Fond gris foncé, texte blanc
+ * Hover: gradient violet
+ */
+.primary {
+  background-color: $color-dark-gray-blue;
+  color: $color-white;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(
+      to bottom,
+      $color-gradient-light-slate-blue,
+      $color-gradient-light-royal-blue
+    );
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-gradient-light-slate-blue;
+    outline-offset: 2px;
+  }
+}
+
+/**
+ * Variante Secondary
+ * Fond transparent, bordure, texte coloré
+ */
+.secondary {
+  background-color: transparent;
+  color: $color-dark-gray-blue;
+  border: 2px solid $color-dark-gray-blue;
+
+  &:hover:not(:disabled) {
+    background-color: $color-pale-blue;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-dark-gray-blue;
+    outline-offset: 2px;
+  }
+}
