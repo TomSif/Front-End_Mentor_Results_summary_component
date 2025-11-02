@@ -103,13 +103,14 @@
 - [x] Installer et configurer Storybook
 - [x] Installer et configurer Vitest
 
-### 🔜 Phase 2: Types & Utils (À venir)
+### ✅ Phase 2: Types & Utils (Terminée)
 
-- [ ] Créer les interfaces TypeScript
-- [ ] Écrire les tests pour `calculateScore()`
-- [ ] Implémenter `calculateScore()`
-- [ ] Écrire les tests pour `getFeedback()`
-- [ ] Implémenter `getFeedback()`
+- [x] Créer les interfaces TypeScript
+- [x] Écrire les tests pour `calculateScore()`
+- [x] Implémenter `calculateScore()`
+- [x] Écrire les tests pour `getFeedback()`
+- [x] Implémenter `getFeedback()`
+- [x] Corriger l'alignement avec le design (feedback levels)
 
 ### 🔜 Phase 3: Composants (À venir)
 
@@ -167,21 +168,22 @@
 ## Métriques du Projet
 
 **Temps estimé:** ~8-12 heures
-**Temps passé:** ~2 heures (planification + setup complet)
+**Temps passé:** ~4 heures (planification + setup + types & utils)
 
 **Composants:**
 - Total: 7
 - Complétés: 0
+- En cours: Phase 2 terminée (fondations prêtes)
 
 **Tests:**
-- Total prévu: ~15
-- Écrits: 0
-- Passing: 0
-- Coverage: 0%
+- Total prévu: ~40 (utils + composants)
+- Écrits: 21
+- Passing: 21 ✅
+- Coverage: 100% sur utils
 
 **Commits:**
-- Total: 3
-- Dernier: feat: configure Storybook and Vitest
+- Total: 8
+- Dernier: fix: align feedback levels with design requirements
 
 ---
 
@@ -227,13 +229,141 @@ Un seul fichier `types/index.ts` pour éviter la duplication
 
 ---
 
-## Session 2 - À venir
+### 2025-11-02 - Session 2: Phase 2 - Types & Utils avec TDD ✅
 
-Prochaine étape: **Phase 2 - Types & Utils**
-- Créer les interfaces TypeScript
-- Développer la logique métier avec TDD
-- Tests unitaires pour calculateScore() et getFeedback()
+#### Approche pédagogique prioritaire
+
+**Nouveau principe ajouté aux instructions :**
+- L'apprentissage prime sur la vitesse
+- Explications avant implémentation
+- Participation active et vérification de compréhension
+- Outils à maîtriser : TypeScript, Storybook, Vitest, SASS
+
+#### Types TypeScript créés ✅
+
+**Fichier:** `src/types/index.ts`
+
+**Types de données:**
+- `Category` : Type littéral pour les 4 catégories ('Reaction' | 'Memory' | 'Verbal' | 'Visual')
+- `ScoreItem` : Interface pour la structure de data.json
+- `ScoreData` : Type pour le tableau de ScoreItem
+- `ResultLevel` : Type littéral pour les 10 niveaux de feedback
+- `Feedback` : Interface pour la structure du feedback
+
+**Props de composants:**
+- `ScoreCircleProps`, `ResultFeedbackProps`, `SummaryItemProps`
+- `SummaryListProps`, `ButtonProps`
+
+**Apprentissages:**
+- Différence entre `type` et `interface`
+- Types littéraux pour limiter les valeurs possibles (protection contre typos)
+- Propriétés optionnelles avec `?`
+- Commentaires JSDoc pour documentation automatique
+
+#### Fonction calculateScore() ✅
+
+**Fichier:** `src/utils/calculateScore.ts`
+
+**Implémentation:**
+- Utilise `.map()` pour extraire les scores : `[{score:80}]` → `[80]`
+- Utilise `.reduce()` pour sommer : `[80,92,61,72]` → `305`
+- Divise par la longueur : `305 / 4 = 76.25`
+- Arrondit avec `Math.round()` : `76.25` → `76`
+
+**Tests:** 5 tests dans `calculateScore.test.ts`
+- Cas nominal (données Frontend Mentor)
+- Arrondis vers le bas et vers le haut
+- Scores parfaits (100) et nuls (0)
+
+**Apprentissages:**
+- TDD : Tests d'abord, code ensuite
+- Pattern AAA (Arrange-Act-Assert)
+- `.map()`, `.reduce()` pour manipulation de tableaux
+- `Math.round()` vs `Math.floor()` vs `Math.ceil()`
+
+#### Fonction getFeedback() ✅
+
+**Fichier:** `src/utils/getFeedback.ts`
+
+**Approches discutées:**
+1. Tableau + `.find()` (choisi) ✅
+2. Conditions if/else comparatives
+3. Calcul mathématique avec index (bug identifié : score 100 → index 10)
+
+**Implémentation:**
+- Tableau `FEEDBACK_DATA` avec 10 tranches
+- Utilise `.find()` pour chercher la bonne tranche
+- Programmation défensive (fallback si aucune tranche trouvée)
+
+**Tests:** 16 tests dans `getFeedback.test.ts`
+- Structure de retour (level, title, message)
+- Toutes les tranches (début, milieu, fin)
+- Edge cases (0, 100)
+- Frontières entre tranches (9/10, 69/70, 89/90)
+
+**Apprentissages:**
+- `.find()` vs `.filter()` (arrêt vs continuation)
+- Gestion de `undefined` avec TypeScript
+- Edge cases et tests de frontières
+- Discussion sur 3 approches différentes
+
+#### Correction alignement design ✅
+
+**Problème identifié par Tom:** Score 76 affichait "Excellent" au lieu de "Great"
+
+**Solution:**
+- Mise à jour des niveaux : terrible → amazing (au lieu de poor → perfect)
+- Réalignement de toutes les tranches avec le design
+- Score 76 → "Great" + "You scored higher than 65%..." ✅
+
+**Fichiers modifiés:**
+- `types/index.ts` : Type ResultLevel mis à jour
+- `getFeedback.ts` : FEEDBACK_DATA réécrit
+- `getFeedback.test.ts` : 21 tests mis à jour
+
+**Apprentissages:**
+- Importance de vérifier le design comme source de vérité
+- Attention aux détails (qualité professionnelle)
+- Communication claire des problèmes identifiés
+
+#### Résultats Session 2
+
+**Commits:**
+- `feat: implement TypeScript types and utility functions with TDD`
+- `fix: align feedback levels with design requirements`
+
+**Statistiques:**
+- ✅ 21 tests qui passent (5 calculateScore + 16 getFeedback)
+- ✅ 5 fichiers créés (types + utils + tests)
+- ✅ 539 lignes de code ajoutées
+- ✅ 100% de coverage sur les fonctions utils
+
+**Concepts maîtrisés:**
+- TypeScript : types, interfaces, littéraux, optionnels, JSDoc
+- JavaScript : .map(), .reduce(), .find(), arrow functions
+- Vitest/TDD : describe, test, expect, AAA pattern, edge cases
+- Git : conventional commits, messages descriptifs
 
 ---
 
-*Dernière mise à jour: 2025-11-02 (Session 1 terminée)*
+### 🔜 Session 3 - À venir
+
+**Phase 3: Composants React + Storybook**
+
+Prochains composants à créer:
+1. Button - Composant générique réutilisable
+2. ScoreCircle - Cercle avec le score
+3. ResultFeedback - Titre et message
+4. SummaryItem - Ligne d'une catégorie
+5. SummaryList - Liste des 4 catégories
+6. ResultCard & SummaryPanel - Containers
+
+Pour chaque composant:
+- ✅ Composant React + TypeScript
+- ✅ Styles SASS (modules)
+- ✅ Story Storybook
+- ✅ Tests visuels
+
+---
+
+*Dernière mise à jour: 2025-11-02 (Session 2 terminée - Types & Utils)*
