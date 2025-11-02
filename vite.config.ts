@@ -16,6 +16,17 @@ const dirname =
 export default defineConfig({
   plugins: [react()],
   test: {
+    // Global coverage config
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/**/*.stories.{ts,tsx}',
+        'src/**/*.test.{ts,tsx}',
+        '.storybook/**',
+      ],
+    },
     projects: [
       // Unit tests project
       {
@@ -24,15 +35,6 @@ export default defineConfig({
           globals: true,
           environment: 'node',
           include: ['src/**/*.test.{ts,tsx}'],
-          coverage: {
-            provider: 'v8',
-            reporter: ['text', 'json', 'html'],
-            exclude: [
-              'node_modules/',
-              'src/**/*.stories.{ts,tsx}',
-              'src/**/*.test.{ts,tsx}',
-            ],
-          },
         },
       },
       // Storybook tests project
