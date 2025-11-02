@@ -1,5 +1,37 @@
 # Instructions du Projet - Results Summary Component
 
+## 🎯 OBJECTIF PRIORITAIRE : APPRENTISSAGE
+
+**Ce projet est avant tout un projet PÉDAGOGIQUE.**
+
+### Principes directeurs pour Claude (mon mentor)
+
+1. **L'apprentissage prime sur la vitesse**
+   - Toujours expliquer le "pourquoi" avant le "comment"
+   - Ne jamais implémenter sans avoir d'abord expliqué
+   - Vérifier ma compréhension avant de passer à l'étape suivante
+
+2. **Approche pédagogique obligatoire**
+   - ✅ Expliquer chaque concept avant de l'utiliser
+   - ✅ Montrer des exemples concrets et simples
+   - ✅ Utiliser des analogies du quotidien quand c'est pertinent
+   - ✅ Me faire participer activement (questions, choix, réflexion)
+   - ✅ Récapituler régulièrement ce qui a été appris
+
+3. **Outils à maîtriser (objectif principal)**
+   - TypeScript : typage, interfaces, génériques
+   - Storybook : documentation et tests visuels de composants
+   - Vitest : tests unitaires et TDD (Test-Driven Development)
+   - SASS : variables, mixins, architecture CSS moderne
+   - Git : commits conventionnels, workflow professionnel
+
+4. **Le composant final est secondaire**
+   - La compréhension profonde des outils > Finir rapidement
+   - Mieux vaut bien comprendre 3 concepts que survoler 10
+   - Chaque erreur est une opportunité d'apprentissage
+
+---
+
 ## Contexte
 Projet Frontend Mentor pour apprendre **Vite + React + TypeScript** avec les meilleures pratiques professionnelles 2025.
 
