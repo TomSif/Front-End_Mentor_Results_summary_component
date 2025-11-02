@@ -9,7 +9,7 @@
 
 ## Journal de Progression
 
-### 2025-11-02 - Initialisation du Projet
+### 2025-11-02 - Session 1: Planification et Setup Complet
 
 #### Phase de Planification ✅
 
@@ -49,19 +49,59 @@
    - ✅ `instructions.md` - Spécifications complètes
    - ✅ `progression.md` - Ce fichier
 
+#### Phase de Setup ✅
+
+**Outils configurés:**
+
+1. **ESLint + Prettier**
+   - ESLint 9.36.0 (flat config moderne)
+   - Prettier 3.6.2 avec intégration ESLint
+   - Scripts: `npm run lint`, `npm run format`
+
+2. **Git**
+   - Repository initialisé
+   - .gitignore configuré
+   - 2 commits effectués avec conventional commits
+
+3. **SASS**
+   - sass ^1.93.3 installé
+   - Design system complet créé:
+     * `variables.scss` - Couleurs, typo, spacing
+     * `mixins.scss` - Utilitaires réutilisables
+     * `global.scss` - Reset CSS et styles de base
+   - Font Hanken Grotesk configurée
+
+4. **Storybook 10.0.2**
+   - Framework: React-Vite
+   - Addons installés:
+     * addon-docs - Documentation
+     * addon-a11y - Tests d'accessibilité
+     * addon-vitest - Intégration tests
+   - Preview configuré avec styles globaux
+   - Scripts: `npm run storybook`, `npm run build-storybook`
+
+5. **Vitest 4.0.6**
+   - Configuration dual-project:
+     * Tests unitaires (Node environment)
+     * Tests Storybook (Browser avec Playwright)
+   - Coverage V8 configuré
+   - Scripts: `npm test`, `npm run test:watch`, `npm run test:coverage`
+
+**Résultat:** Stack de développement professionnel complètement opérationnel!
+
 ---
 
 ## Prochaines Étapes
 
-### 🏗️ Phase 1: Setup (En cours)
+### ✅ Phase 1: Setup (Terminée)
 
 - [x] Initialiser le projet Vite + React + TypeScript
 - [x] Restructurer l'arborescence du projet (dossiers nettoyés)
-- [ ] Configurer ESLint + Prettier
-- [ ] Initialiser Git et premier commit
-- [ ] Installer et configurer SASS
-- [ ] Installer et configurer Storybook
-- [ ] Installer et configurer Vitest
+- [x] Configurer ESLint + Prettier
+- [x] Initialiser Git et premier commit
+- [x] Installer et configurer SASS
+- [x] Installer et configurer Storybook
+- [x] Installer et configurer Vitest
 
 ### 🔜 Phase 2: Types & Utils (À venir)
 
@@ -127,7 +167,7 @@
 ## Métriques du Projet
 
 **Temps estimé:** ~8-12 heures
-**Temps passé:** 1 heure (planification)
+**Temps passé:** ~2 heures (planification + setup complet)
 
 **Composants:**
 - Total: 7
@@ -140,8 +180,8 @@
 - Coverage: 0%
 
 **Commits:**
-- Total: 0
-- Dernier: N/A
+- Total: 3
+- Dernier: feat: configure Storybook and Vitest
 
 ---
 
@@ -185,4 +225,15 @@ Un seul fichier `types/index.ts` pour éviter la duplication
 
 ---
 
-*Dernière mise à jour: 2025-11-02*
+---
+
+## Session 2 - À venir
+
+Prochaine étape: **Phase 2 - Types & Utils**
+- Créer les interfaces TypeScript
+- Développer la logique métier avec TDD
+- Tests unitaires pour calculateScore() et getFeedback()
+
+---
+
+*Dernière mise à jour: 2025-11-02 (Session 1 terminée)*
