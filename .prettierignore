@@ -1,0 +1,17 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.vite
+
+# Storybook
+storybook-static
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
