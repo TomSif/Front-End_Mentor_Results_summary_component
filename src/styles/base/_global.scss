@@ -1,0 +1,33 @@
+// =============================================================================
+// GLOBAL - Styles globaux de l'application
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Body styles
+body {
+  min-height: 100vh;
+  background-color: $color-white;
+}
+
+// Root container
+#root {
+  @include flex-center;
+  min-height: 100vh;
+  padding: $spacing-300;
+
+  @include mobile {
+    padding: 0;
+  }
+}
+
+// Remove default button styles
+button {
+  @include button-reset;
+}
+
+// Accessibility - classe pour cacher visuellement mais garder pour screen readers
+.sr-only {
+  @include visually-hidden;
+}

@@ -1,0 +1,20 @@
+// =============================================================================
+// MAIN - Point d'entrée principal pour les styles
+// =============================================================================
+// Architecture 7-1 Pattern (version hybride pour React avec CSS Modules)
+// Ce fichier exporte toutes les abstractions (variables, mixins)
+// et applique les styles de base globaux
+
+// 1. Abstracts (variables, mixins, functions) - FORWARDED pour utilisation dans les composants
+// -----------------------------------------------------------------------------
+@forward './abstracts/variables';
+@forward './abstracts/mixins';
+
+// 2. Base (reset, typography, global) - USED pour application globale
+// -----------------------------------------------------------------------------
+@use './base/reset';
+@use './base/typography';
+@use './base/global';
+
+// Note: Les composants importent ce fichier pour avoir accès aux abstracts
+// Exemple: @use '@/styles/main' as *;

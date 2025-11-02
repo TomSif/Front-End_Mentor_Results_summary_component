@@ -1,28 +1,26 @@
 /**
  * Styles du composant Button
  *
- * Utilise les variables définies dans styles/variables.scss
- * et les mixins de styles/mixins.scss
+ * Utilise les variables du design system Figma via main.scss
  */
 
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use '../../styles/main' as *;
 
 .button {
   // Reset des styles par défaut du navigateur
   border: none;
   cursor: pointer;
-  font-family: $font-family;
-  font-size: $font-size-body;
-  font-weight: $font-weight-bold;
+
+  // Typography - Text Preset 5 Bold
+  @include text-preset-5-bold;
 
   // Layout
   width: 100%;
-  padding: $spacing-md $spacing-lg;
+  padding: $spacing-200 $spacing-400; // 16px 32px
   border-radius: $border-radius-lg;
 
   // Transition pour les effets hover
-  transition: background-color 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out;
 
   // État désactivé
   &:disabled {
@@ -33,42 +31,38 @@
 
 /**
  * Variante Primary (par défaut)
- * Fond gris foncé, texte blanc
- * Hover: gradient violet
+ * Fond Navy 950, texte blanc
+ * Hover: Gradient 1
  */
 .primary {
-  background-color: $color-dark-gray-blue;
+  background-color: $color-navy-950;
   color: $color-white;
 
   &:hover:not(:disabled) {
-    background: linear-gradient(
-      to bottom,
-      $color-gradient-light-slate-blue,
-      $color-gradient-light-royal-blue
-    );
+    background: $gradient-1;
   }
 
   &:focus-visible {
-    outline: 2px solid $color-gradient-light-slate-blue;
+    outline: 2px solid $color-navy-200;
     outline-offset: 2px;
   }
 }
 
 /**
  * Variante Secondary
- * Fond transparent, bordure, texte coloré
+ * Fond transparent, bordure Navy 950, texte Navy 950
  */
 .secondary {
   background-color: transparent;
-  color: $color-dark-gray-blue;
-  border: 2px solid $color-dark-gray-blue;
+  color: $color-navy-950;
+  border: 2px solid $color-navy-950;
 
   &:hover:not(:disabled) {
-    background-color: $color-pale-blue;
+    background-color: $color-navy-50;
   }
 
   &:focus-visible {
-    outline: 2px solid $color-dark-gray-blue;
+    outline: 2px solid $color-navy-200;
     outline-offset: 2px;
   }
 }

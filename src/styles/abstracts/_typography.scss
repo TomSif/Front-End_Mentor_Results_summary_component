@@ -1,0 +1,92 @@
+// =============================================================================
+// TYPOGRAPHY - From Figma Design System
+// =============================================================================
+
+// Font Family
+// -----------------------------------------------------------------------------
+$font-family-base: 'Hanken Grotesk', sans-serif;
+
+// Font Weights
+// -----------------------------------------------------------------------------
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Font Sizes (Text Presets from Figma)
+// -----------------------------------------------------------------------------
+$font-size-preset-1: 72px;  // Hanken Grotesk ExtraBold
+$font-size-preset-2: 56px;  // Hanken Grotesk ExtraBold
+$font-size-preset-3: 32px;  // Hanken Grotesk Bold
+$font-size-preset-4: 24px;  // Hanken Grotesk Bold
+$font-size-preset-5: 18px;  // Hanken Grotesk Bold/Medium
+$font-size-preset-6: 16px;  // Hanken Grotesk Bold/Medium
+
+// Line Heights (130% from Figma)
+// -----------------------------------------------------------------------------
+$line-height-base: 130%;
+
+// Typography Mixins for Text Presets
+// -----------------------------------------------------------------------------
+@mixin text-preset-1 {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-1;
+  font-weight: $font-weight-extrabold;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-2 {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-2;
+  font-weight: $font-weight-extrabold;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-3 {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-3;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-4 {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-4;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-5-bold {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-5;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-5-medium {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-5;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-6-bold {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-6;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-6-medium {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-6;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-base;
+  letter-spacing: 0;
+}

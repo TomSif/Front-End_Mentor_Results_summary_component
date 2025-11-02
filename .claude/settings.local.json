@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(move _colors.scss abstracts_colors.scss)",
+      "Bash(move _typography.scss abstracts_typography.scss)",
+      "Bash(move _spacing.scss abstracts_spacing.scss)",
+      "Bash(mv _colors.scss abstracts/_colors.scss)",
+      "Bash(mv:*)",
+      "Bash(mv _spacing.scss abstracts/_spacing.scss)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

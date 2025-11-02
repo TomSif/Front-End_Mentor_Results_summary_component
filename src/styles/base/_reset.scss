@@ -1,0 +1,46 @@
+// =============================================================================
+// RESET - Reset CSS minimal et moderne
+// =============================================================================
+
+// CSS Reset moderne
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Reset des listes
+ul,
+ol {
+  list-style: none;
+}
+
+// Reset des liens
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Reset des images
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Reset des formulaires
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Amélioration du rendu des textes
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

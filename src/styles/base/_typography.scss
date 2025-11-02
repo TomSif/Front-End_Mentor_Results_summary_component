@@ -1,0 +1,23 @@
+// =============================================================================
+// TYPOGRAPHY BASE - Configuration globale de la typographie
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+// Font face - Hanken Grotesk
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('/assets/fonts/HankenGrotesk-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+// Styles globaux du body
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-preset-5; // 18px par défaut
+  font-weight: $font-weight-medium;
+  line-height: $line-height-base;
+  color: $color-navy-950;
+}

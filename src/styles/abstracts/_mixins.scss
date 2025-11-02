@@ -1,0 +1,110 @@
+// =============================================================================
+// MIXINS - Réutilisables à travers le projet
+// =============================================================================
+
+@use './variables' as *;
+
+// Responsive breakpoints
+// -----------------------------------------------------------------------------
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Flexbox utilities
+// -----------------------------------------------------------------------------
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Gradients (basés sur les gradients Figma)
+// -----------------------------------------------------------------------------
+@mixin gradient-background-1 {
+  background: $gradient-1;
+}
+
+@mixin gradient-background-2 {
+  background: $gradient-2;
+}
+
+// Card styles
+// -----------------------------------------------------------------------------
+@mixin card {
+  border-radius: $border-radius-lg;
+  padding: $spacing-400;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+// Button reset
+// -----------------------------------------------------------------------------
+@mixin button-reset {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+// Visually hidden (pour l'accessibilité)
+// -----------------------------------------------------------------------------
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Truncate text avec ellipsis
+// -----------------------------------------------------------------------------
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Line clamp (limiter le nombre de lignes)
+// -----------------------------------------------------------------------------
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

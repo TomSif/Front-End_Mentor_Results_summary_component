@@ -1,0 +1,46 @@
+// =============================================================================
+// COLORS - From Figma Design System
+// =============================================================================
+
+// Base Colors
+// -----------------------------------------------------------------------------
+$color-white: #FFFFFF;
+$color-black: #000000;
+
+// Navy Palette
+// -----------------------------------------------------------------------------
+$color-navy-950: #303B59;
+$color-navy-200: #CAC9FF;
+$color-navy-50: #ECF2FF;
+
+// Blue Palette
+// -----------------------------------------------------------------------------
+$color-blue-800: #1125D4;
+$color-blue-50: #F3F4FD;
+
+// Yellow Palette
+// -----------------------------------------------------------------------------
+$color-yellow-400: #FFB21E;
+$color-yellow-50: #FFF9F4;
+
+// Red Palette
+// -----------------------------------------------------------------------------
+$color-red-400: #FF5555;
+$color-red-50: #FFF6F6;
+
+// Green Palette
+// -----------------------------------------------------------------------------
+$color-green-500: #00BB8F;
+$color-green-50: #F2FCF9;
+
+// Gradients
+// -----------------------------------------------------------------------------
+$gradient-1: linear-gradient(180deg, #7755FF 0%, #2527C9 100%);
+$gradient-2: linear-gradient(180deg, #7755FF 0%, #2F2CE9 100%);
+
+// Semantic Color Aliases (optional - à personnaliser selon l'usage)
+// -----------------------------------------------------------------------------
+$color-primary: $color-blue-800;
+$color-background: $color-white;
+$color-text-primary: $color-navy-950;
+$color-text-secondary: $color-navy-200;
