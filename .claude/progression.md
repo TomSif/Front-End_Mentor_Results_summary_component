@@ -400,13 +400,80 @@ App (State global: scores avec useState)
 
 **Commit:** `feat: add default scores data with design values`
 
+#### Composant Button créé ✅
+
+**Fichier:** `src/components/Button/`
+
+**Structure du composant:**
+- `Button.tsx` - Composant React fonctionnel
+- `Button.module.scss` - Styles avec SASS modules
+- `Button.stories.tsx` - Documentation Storybook
+
+**Implémentation:**
+
+1. **Button.tsx:**
+   - Props: `children`, `onClick`, `variant`, `disabled`
+   - Valeurs par défaut: `variant='primary'`, `disabled=false`
+   - Utilise destructuring et typage strict avec ButtonProps
+   - Combine dynamiquement les classes CSS: `${styles.button} ${styles[variant]}`
+
+2. **Button.module.scss:**
+   - Import des variables SASS: `@use '../../styles/variables' as *`
+   - Variante **primary**: Fond gris foncé, hover avec gradient violet
+   - Variante **secondary**: Fond transparent avec bordure
+   - États: `:hover`, `:focus-visible`, `:disabled`
+   - Transitions smooth (0.2s ease-in-out)
+   - État disabled: `opacity: 0.5`, `cursor: not-allowed`
+
+3. **Button.stories.tsx:**
+   - 4 stories créées: Primary, Secondary, Disabled, LongText
+   - Configuration Meta avec `argTypes` pour les controls
+   - `action: 'clicked'` pour logger les clics dans Storybook
+   - Tag `autodocs` pour génération automatique de la documentation
+
+**Apprentissages:**
+
+**1. CSS Modules avec SASS:**
+- Import avec `@use` au lieu de `@import` (syntaxe moderne)
+- Namespace avec `as *` pour accéder directement aux variables
+- Classes scopées automatiquement par Vite (ex: `Button_button__a1b2c`)
+- Permet d'éviter les conflits de noms CSS
+
+**2. Composition de classes CSS:**
+```typescript
+className={`${styles.button} ${styles[variant]}`}
+// Résultat: "Button_button__a1b2c Button_primary__d3e4f"
+```
+- Template literals pour combiner plusieurs classes
+- `styles[variant]` permet d'accéder dynamiquement à `.primary` ou `.secondary`
+
+**3. Storybook Meta configuration:**
+- `argTypes` définit les contrôles interactifs:
+  * `control: 'select'` → dropdown
+  * `control: 'boolean'` → toggle
+  * `control: 'text'` → input texte
+- `action: 'clicked'` log automatiquement les événements
+- `tags: ['autodocs']` génère la doc depuis JSDoc
+
+**4. Pattern de composant réutilisable:**
+- Props avec valeurs par défaut (variant, disabled)
+- Props optionnelles avec `?` (onClick)
+- Gère tous les cas d'usage (primary, secondary, disabled)
+- Accessible (focus-visible, type="button")
+
+**Tests visuels:**
+- Build TypeScript: ✅ Compilation sans erreur
+- Storybook: En cours de démarrage pour tests visuels
+
+**Commit:** `feat: create Button component with variants and Storybook docs`
+
 ---
 
 ### 🔜 Prochaines étapes Session 3
 
 **Composants à créer (ordre ajusté) :**
 1. ✅ defaultScores.ts - Données initiales
-2. ⏳ Button - Composant simple pour apprendre le workflow
+2. ✅ Button - Composant simple pour apprendre le workflow
 3. ⏳ InputScore - Composant clé avec input contrôlé
 4. ⏳ SummaryList - Map sur InputScore
 5. ⏳ ScoreCircle - Affichage dynamique du score
@@ -423,4 +490,4 @@ App (State global: scores avec useState)
 
 ---
 
-*Dernière mise à jour: 2025-11-02 (Session 3 démarrée - defaultScores.ts)*
+*Dernière mise à jour: 2025-11-02 (Session 3 - Button créé)*
