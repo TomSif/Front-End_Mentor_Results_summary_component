@@ -30,79 +30,79 @@ const FEEDBACK_DATA: Array<{
   {
     min: 0,
     max: 9,
-    level: 'poor',
-    title: 'Poor',
+    level: 'terrible',
+    title: 'Terrible',
     message:
-      'You need more practice. Keep studying and try again to improve your score.',
+      'You need a lot more practice. Keep studying and try again to improve your score.',
   },
   {
     min: 10,
     max: 19,
-    level: 'below-average',
-    title: 'Below Average',
+    level: 'bad',
+    title: 'Bad',
     message:
       'Keep working on it! With more effort, you can definitely improve your results.',
   },
   {
     min: 20,
     max: 29,
-    level: 'fair',
-    title: 'Fair',
+    level: 'poor',
+    title: 'Poor',
     message:
-      "You're making progress! Continue learning and you'll see better results soon.",
+      "You're making some progress. Continue learning and you'll see better results soon.",
   },
   {
     min: 30,
     max: 39,
-    level: 'average',
-    title: 'Average',
+    level: 'below-average',
+    title: 'Below Average',
     message:
       'Not bad, but there is room for improvement. Keep pushing yourself!',
   },
   {
     min: 40,
     max: 49,
-    level: 'good',
-    title: 'Good',
+    level: 'average',
+    title: 'Average',
     message:
-      "You're doing well! A bit more practice and you'll reach the next level.",
+      "You're performing at an average level. A bit more practice will help you improve.",
   },
   {
     min: 50,
     max: 59,
-    level: 'very-good',
-    title: 'Very Good',
+    level: 'fair',
+    title: 'Fair',
     message:
-      'Above average performance! You have a solid understanding of the material.',
+      'Fair performance! You have a decent understanding of the material.',
   },
   {
     min: 60,
     max: 69,
+    level: 'good',
+    title: 'Good',
+    message:
+      'Good job! You have a solid grasp of the concepts.',
+  },
+  {
+    min: 70,
+    max: 79,
     level: 'great',
     title: 'Great',
     message:
       'You scored higher than 65% of the people who have taken these tests.',
   },
   {
-    min: 70,
-    max: 79,
-    level: 'excellent',
-    title: 'Excellent',
-    message:
-      'Outstanding performance! You have a strong grasp of the concepts.',
-  },
-  {
     min: 80,
     max: 89,
-    level: 'superb',
-    title: 'Superb',
+    level: 'excellent',
+    title: 'Excellent',
     message: 'Exceptional results! You are among the top performers.',
   },
   {
     min: 90,
     max: 100,
-    level: 'perfect',
-    title: 'Perfect',
+    level: 'amazing',
+    title: 'Amazing',
     message:
       "You're a genius! Nearly perfect score. Congratulations on your achievement!",
   },

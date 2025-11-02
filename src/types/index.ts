@@ -40,16 +40,16 @@ export type ScoreData = ScoreItem[]
  * Basé sur les tranches de 10% (0-9, 10-19, ..., 90-100)
  */
 export type ResultLevel =
-  | 'poor' // 0-9
-  | 'below-average' // 10-19
-  | 'fair' // 20-29
-  | 'average' // 30-39
-  | 'good' // 40-49
-  | 'very-good' // 50-59
-  | 'great' // 60-69
-  | 'excellent' // 70-79
-  | 'superb' // 80-89
-  | 'perfect' // 90-100
+  | 'terrible' // 0-9
+  | 'bad' // 10-19
+  | 'poor' // 20-29
+  | 'below-average' // 30-39
+  | 'average' // 40-49
+  | 'fair' // 50-59
+  | 'good' // 60-69
+  | 'great' // 70-79
+  | 'excellent' // 80-89
+  | 'amazing' // 90-100
 
 /**
  * Interface : structure du feedback affiché
