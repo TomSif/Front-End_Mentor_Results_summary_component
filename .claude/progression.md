@@ -467,6 +467,124 @@ className={`${styles.button} ${styles[variant]}`}
 
 **Commit:** `feat: create Button component with variants and Storybook docs`
 
+#### Architecture Sass 7-1 avec Design System Figma ✅
+
+**Contexte:**
+Ajout des fichiers de référence Figma (Colors.png, Typography.png, Spacing.png) dans `.claude/` pour avoir les spécifications exactes du design system.
+
+**Restructuration complète:**
+
+1. **Nouvelle architecture 7-1 (pattern hybride):**
+```
+src/styles/
+├── abstracts/              # Variables et mixins
+│   ├── _colors.scss        # Palette complète Figma
+│   ├── _typography.scss    # 6 text presets + mixins
+│   ├── _spacing.scss       # Échelle de spacing (0-1000)
+│   ├── _config.scss        # Breakpoints, radius, z-index, transitions
+│   ├── _variables.scss     # @forward de tous les partiels
+│   └── _mixins.scss        # Mixins utilitaires
+├── base/                   # Styles de base
+│   ├── _reset.scss         # Reset CSS moderne
+│   ├── _typography.scss    # Config globale typo (@font-face)
+│   └── _global.scss        # Styles globaux (body, #root)
+└── main.scss               # Point d'entrée unique
+```
+
+2. **Design System Figma intégré:**
+
+**Colors (_colors.scss):**
+- White (#FFFFFF), Black (#000000)
+- Navy: 950 (#303B59), 200 (#CAC9FF), 50 (#ECF2FF)
+- Blue: 800 (#1125D4), 50 (#F3F4FD)
+- Yellow: 400 (#FFB21E), 50 (#FFF9F4)
+- Red: 400 (#FF5555), 50 (#FFF6F6)
+- Green: 500 (#00BB8F), 50 (#F2FCF9)
+- Gradients: gradient-1 (#7755FF → #2527C9), gradient-2 (#7755FF → #2F2CE9)
+
+**Typography (_typography.scss):**
+- Font: Hanken Grotesk (Medium 500, Bold 700, ExtraBold 800)
+- 6 Text Presets avec mixins:
+  * Preset 1: 72px ExtraBold
+  * Preset 2: 56px ExtraBold
+  * Preset 3: 32px Bold
+  * Preset 4: 24px Bold
+  * Preset 5: 18px Bold/Medium
+  * Preset 6: 16px Bold/Medium
+- Line-height: 130%
+- Letter-spacing: 0
+
+**Spacing (_spacing.scss):**
+- spacing-0: 0px
+- spacing-100: 8px
+- spacing-200: 16px
+- spacing-300: 24px
+- spacing-400: 32px
+- spacing-1000: 80px
+- Aliases sémantiques: xs, sm, md, lg, xl
+
+3. **Mise à jour du composant Button:**
+- Utilise `@use '../../styles/main' as *;` (un seul import)
+- Typography: `@include text-preset-5-bold;` (18px Bold)
+- Couleur par défaut: `$color-navy-950`
+- Hover: `$gradient-1`
+- Padding: `$spacing-200 $spacing-400` (16px 32px)
+
+4. **Fichiers mis à jour:**
+- `src/main.tsx` → importe `main.scss` au lieu de `global.scss`
+- `.storybook/preview.ts` → importe `main.scss`
+- `Button.module.scss` → utilise le nouveau système
+
+**Apprentissages:**
+
+**1. Architecture 7-1 Pattern:**
+- **Abstracts:** Variables, mixins, functions (réutilisables, pas de CSS généré)
+- **Base:** Reset, typo globale, styles de base
+- **Components:** (optionnel avec CSS Modules - styles dans chaque composant/)
+- **Layout, Pages, Themes, Vendors:** (pour projets plus grands)
+- Un fichier `main.scss` qui centralise tout
+
+**2. @forward vs @use:**
+- `@forward` réexporte pour créer des points d'entrée
+- `@use` importe pour utiliser (avec namespace)
+- Ne peut pas mélanger `@forward` avec des variables dans le même fichier
+
+**3. Approche hybride moderne:**
+- Variables centralisées dans `abstracts/`
+- Styles globaux dans `base/` (appliqués via main.scss)
+- Styles de composants locaux (CSS Modules)
+- Un seul import dans les composants: `@use 'main' as *;`
+
+**4. Mixins de typographie:**
+Au lieu de répéter:
+```scss
+font-size: 18px;
+font-weight: 700;
+line-height: 130%;
+```
+On utilise:
+```scss
+@include text-preset-5-bold;
+```
+
+**Résultat:**
+- ✅ Build production: Fonctionne
+- ✅ Storybook build: Fonctionne
+- ✅ Architecture scalable et maintenable
+- ✅ Design system Figma parfaitement intégré
+- ✅ Un seul import dans les composants
+
+**Commit:** `refactor: migrate to 7-1 Sass architecture with Figma design system`
+
+**Fichiers ajoutés:**
+- 3 PNG de référence Figma
+- 6 fichiers dans `abstracts/`
+- 3 fichiers dans `base/`
+- 1 fichier `main.scss`
+
+**Fichiers supprimés:**
+- Anciens `variables.scss`, `mixins.scss`, `global.scss` (remplacés par la structure 7-1)
+
 ---
 
 ### 🔜 Prochaines étapes Session 3
@@ -484,10 +602,10 @@ className={`${styles.button} ${styles[variant]}`}
 
 **Pour chaque composant:**
 - Composant React + TypeScript
-- Styles SASS (modules)
+- Styles SASS (modules) avec design system Figma
 - Story Storybook
 - Commit + Doc
 
 ---
 
-*Dernière mise à jour: 2025-11-02 (Session 3 - Button créé)*
+*Dernière mise à jour: 2025-11-02 (Session 3 - Architecture Sass 7-1 + Figma DS)*
