@@ -1,0 +1,40 @@
+// Colors - Primary
+$color-light-red: hsl(0, 100%, 67%);
+$color-orangey-yellow: hsl(39, 100%, 56%);
+$color-green-teal: hsl(166, 100%, 37%);
+$color-cobalt-blue: hsl(234, 85%, 45%);
+
+// Colors - Gradients
+$gradient-light-slate-blue: hsl(252, 100%, 67%);
+$gradient-light-royal-blue: hsl(241, 81%, 54%);
+$gradient-violet-blue: hsla(256, 72%, 46%, 1);
+$gradient-persian-blue: hsla(241, 72%, 46%, 0);
+
+// Colors - Neutral
+$color-white: hsl(0, 0%, 100%);
+$color-pale-blue: hsl(221, 100%, 96%);
+$color-light-lavender: hsl(241, 100%, 89%);
+$color-dark-gray-blue: hsl(224, 30%, 27%);
+
+// Typography
+$font-family: 'Hanken Grotesk', sans-serif;
+$font-size-base: 18px;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+
+// Layout
+$mobile-width: 375px;
+$desktop-width: 1440px;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Border radius
+$border-radius-sm: 0.5rem;
+$border-radius-md: 1rem;
+$border-radius-lg: 2rem;

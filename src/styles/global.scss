@@ -1,0 +1,67 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Font face
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('/assets/fonts/HankenGrotesk-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+// CSS Reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Body styles
+body {
+  @include body-text;
+  min-height: 100vh;
+  background-color: $color-pale-blue;
+  color: $color-dark-gray-blue;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Root container
+#root {
+  @include flex-center;
+  min-height: 100vh;
+  padding: $spacing-md;
+
+  @include mobile {
+    padding: 0;
+  }
+}
+
+// Remove default button styles
+button {
+  @include button-reset;
+}
+
+// Image styles
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Accessibility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
