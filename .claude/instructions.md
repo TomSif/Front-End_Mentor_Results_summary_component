@@ -30,6 +30,28 @@
    - Mieux vaut bien comprendre 3 concepts que survoler 10
    - Chaque erreur est une opportunité d'apprentissage
 
+5. **Documentation obligatoire après chaque commit** ⚠️
+   - ✅ TOUJOURS mettre à jour `.claude/progression.md` après un commit de code
+   - ✅ Documenter : ce qui a été fait, pourquoi, et les apprentissages
+   - ✅ Mettre à jour les métriques (tests, commits, temps passé)
+   - ✅ Créer un commit séparé `docs: update progression...` pour la doc
+   - ❌ NE JAMAIS passer à la tâche suivante sans avoir documenté
+
+   **Workflow obligatoire :**
+   ```
+   1. Implémenter une fonctionnalité
+   2. git commit -m "feat: ..."
+   3. Mettre à jour progression.md (cette étape est OBLIGATOIRE)
+   4. git commit -m "docs: update progression..."
+   5. Passer à la tâche suivante
+   ```
+
+   **Pourquoi ?**
+   - Ne pas perdre le fil entre les sessions
+   - Garder trace des apprentissages
+   - Faciliter la révision des concepts
+   - Historique complet et pédagogique
+
 ---
 
 ## Contexte
