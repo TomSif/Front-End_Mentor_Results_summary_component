@@ -1,0 +1,103 @@
+/**
+ * Styles du composant InputScore
+ *
+ * Design pattern:
+ * - Utilise CSS custom property --category-color pour la couleur dynamique
+ * - Background avec la couleur à 5% d'opacité (ex: red-50, yellow-50)
+ * - Icône et texte avec la couleur principale
+ */
+
+@use '../../styles/main' as *;
+
+.inputScore {
+  // Layout: flexbox pour aligner icône, catégorie, et input
+  display: flex;
+  align-items: center;
+  gap: $spacing-200; // 16px entre les éléments
+
+  // Background avec la couleur de catégorie (passée via CSS variable)
+  background-color: color-mix(in srgb, var(--category-color) 5%, transparent);
+
+  // Spacing et border radius
+  padding: $spacing-200 $spacing-200; // 16px
+  border-radius: $border-radius-md;
+
+  // Transition pour les effets hover
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--category-color) 10%, transparent);
+  }
+}
+
+.icon {
+  // Taille de l'icône
+  width: 20px;
+  height: 20px;
+
+  // Applique la couleur de catégorie via filter (pour les SVG)
+  // Note: Pour que ça fonctionne, les SVG doivent être en currentColor
+  flex-shrink: 0; // Empêche l'icône de rétrécir
+}
+
+.category {
+  // Typography - Text Preset 6 Bold
+  @include text-preset-6-bold;
+
+  // Couleur de la catégorie
+  color: var(--category-color);
+
+  // Flex pour pousser l'input à droite
+  flex: 1;
+}
+
+.scoreContainer {
+  // Container pour l'input et "/100"
+  display: flex;
+  align-items: center;
+  gap: $spacing-100; // 8px
+
+  // Typography - Text Preset 5 Bold
+  @include text-preset-5-bold;
+}
+
+.input {
+  // Reset des styles par défaut
+  border: none;
+  background: transparent;
+  outline: none;
+
+  // Typography
+  @include text-preset-5-bold;
+  color: $color-navy-950;
+
+  // Largeur fixe pour l'input
+  width: 50px;
+  text-align: right;
+
+  // Enlève les flèches du input type="number"
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  // Focus state
+  &:focus {
+    // Soulignement subtil au focus
+    border-bottom: 2px solid var(--category-color);
+  }
+
+  // Placeholder
+  &::placeholder {
+    color: $color-navy-200;
+  }
+}
+
+.maxScore {
+  // Typography - Text Preset 6 Medium
+  @include text-preset-6-medium;
+  color: color-mix(in srgb, $color-navy-950 50%, transparent);
+  opacity: 0.5;
+}

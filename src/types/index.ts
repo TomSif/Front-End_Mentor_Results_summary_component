@@ -98,6 +98,15 @@ export interface SummaryItemProps {
 }
 
 /**
+ * Props du composant InputScore
+ * Affiche une ligne interactive avec input pour modifier le score
+ */
+export interface InputScoreProps {
+  item: ScoreItem // Un objet du tableau data.json
+  onScoreChange: (newScore: number) => void // Callback pour remonter le changement
+}
+
+/**
  * Props du composant SummaryList
  * Affiche la liste des 4 catégories
  */
