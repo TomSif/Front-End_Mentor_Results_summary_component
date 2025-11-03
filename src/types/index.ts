@@ -90,6 +90,14 @@ export interface ResultFeedbackProps {
 }
 
 /**
+ * Props du composant ResultCard
+ * Container qui combine ScoreCircle + ResultFeedback
+ */
+export interface ResultCardProps {
+  score: number // Score calculé à afficher et utiliser pour le feedback
+}
+
+/**
  * Props du composant SummaryItem
  * Affiche une ligne du résumé (ex: Reaction 80/100)
  */

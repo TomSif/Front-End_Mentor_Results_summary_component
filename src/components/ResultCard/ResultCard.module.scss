@@ -1,0 +1,46 @@
+/**
+ * Styles du composant ResultCard
+ *
+ * Design pattern:
+ * - Container avec gradient background (gradient-1 du design Figma)
+ * - Layout flexbox vertical avec centrage
+ * - Border radius pour les coins arrondis
+ * - Espacement entre les éléments (titre, cercle, feedback)
+ */
+
+@use '../../styles/main' as *;
+
+.card {
+  // Gradient de fond (Figma gradient-1)
+  background: $gradient-1;
+
+  // Border radius pour les coins arrondis
+  border-radius: $border-radius-lg; // 24px
+
+  // Layout flexbox vertical
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centre horizontalement
+  gap: $spacing-300; // 24px entre les éléments
+
+  // Padding interne
+  padding: $spacing-400 $spacing-500; // 32px top/bottom, 40px left/right
+
+  // Largeur minimale pour assurer un bon rendu
+  min-width: 368px;
+}
+
+.title {
+  // Typography - Text Preset 5 Bold (18px)
+  @include text-preset-5-bold;
+  color: $color-white;
+
+  // Texte légèrement transparent pour le rendre subtil
+  opacity: 0.7;
+
+  // Reset margin
+  margin: 0;
+
+  // Centrage du texte
+  text-align: center;
+}
