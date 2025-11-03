@@ -33,8 +33,8 @@ function App() {
     console.log(`Category ${category} changed to ${newScore}`)
 
     // Mise à jour immutable du state
-    setScores((prevScores) =>
-      prevScores.map((item) =>
+    setScores(prevScores =>
+      prevScores.map(item =>
         item.category === category ? { ...item, score: newScore } : item
       )
     )
@@ -43,8 +43,8 @@ function App() {
   const handleContinue = () => {
     console.log('Continue clicked - Resetting all scores to 0')
     // Reset tous les scores à 0
-    setScores((prevScores) =>
-      prevScores.map((item) => ({
+    setScores(prevScores =>
+      prevScores.map(item => ({
         ...item,
         score: 0,
       }))

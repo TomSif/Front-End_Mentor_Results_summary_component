@@ -87,8 +87,7 @@ const FEEDBACK_DATA: Array<{
     max: 69,
     level: 'good',
     title: 'Good',
-    message:
-      'Good job! You have a solid grasp of the concepts.',
+    message: 'Good job! You have a solid grasp of the concepts.',
   },
   {
     min: 70,
