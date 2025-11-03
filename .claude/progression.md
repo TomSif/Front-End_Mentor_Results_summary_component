@@ -585,6 +585,122 @@ On utilise:
 **Fichiers supprimés:**
 - Anciens `variables.scss`, `mixins.scss`, `global.scss` (remplacés par la structure 7-1)
 
+#### Composant InputScore créé ✅
+
+**Fichiers créés:**
+- `src/components/InputScore/InputScore.tsx` - Composant React
+- `src/components/InputScore/InputScore.module.scss` - Styles
+- `src/components/InputScore/InputScore.stories.tsx` - Documentation Storybook
+- Interface `InputScoreProps` ajoutée dans `types/index.ts`
+
+**Implémentation:**
+
+1. **Pattern Controlled Input:**
+```tsx
+<input
+  value={item.score}           // ← Valeur contrôlée par React
+  onChange={handleChange}       // ← Handler pour le changement
+/>
+```
+- React devient la source de vérité unique
+- Validation en temps réel (0-100)
+- Synchronisation automatique UI ↔ State
+
+2. **Lookup Table Pattern (découverte clé):**
+```tsx
+// Deux structures séparées
+DEFAULT_SCORES = [{ category: 'Reaction', score: 80 }]
+CATEGORY_COLORS = { Reaction: 'hsl(0, 100%, 67%)' }
+
+// Fusion au moment du render
+const color = CATEGORY_COLORS[item.category]
+//                              ↑
+//                 Utilise category comme clé
+```
+**Pourquoi c'est puissant :**
+- Évite la duplication de données
+- Séparation données métier vs configuration UI
+- Facile à maintenir (un seul endroit pour les couleurs)
+
+3. **CSS Custom Properties (variables CSS dynamiques):**
+```tsx
+<div style={{ '--category-color': color }}>
+```
+```scss
+.inputScore {
+  background-color: color-mix(in srgb, var(--category-color) 5%, transparent);
+}
+```
+- Injection de valeurs JavaScript dans CSS
+- Permet des styles dynamiques sans inline styles partout
+
+4. **Callback Props (State Lifting):**
+```tsx
+// Parent (App) détient le state
+onScoreChange={(newScore) => {
+  // Met à jour le state global
+}}
+
+// Enfant (InputScore) remonte les changements
+<InputScore item={...} onScoreChange={callback} />
+```
+
+**Storybook - 7 stories créées:**
+- Reaction, Memory, Verbal, Visual (4 catégories)
+- Interactive (démo avec useState local)
+- AllCategories (comparaison visuelle)
+- EdgeCases (scores 0, 50, 100)
+
+**Apprentissages Session 3 - Partie InputScore:**
+
+1. **Controlled vs Uncontrolled inputs:**
+   - Uncontrolled: DOM détient la valeur
+   - Controlled: React détient la valeur (meilleur pour validation et sync)
+
+2. **Lookup Table Pattern:**
+   - Utiliser une valeur comme clé pour récupérer une autre valeur
+   - `CATEGORY_COLORS[item.category]` → couleur
+   - Comme une jointure de tables en base de données !
+
+3. **Séparation des préoccupations:**
+   - Données métier: `DEFAULT_SCORES` (category, score, icon)
+   - Configuration UI: `CATEGORY_COLORS` (couleurs)
+   - Fusion dans le composant, pas dans les données
+
+4. **Event Handling:**
+   - `event.target.value` pour récupérer la nouvelle valeur
+   - `Number()` pour convertir string → number
+   - Validation avant de remonter au parent
+
+5. **TypeScript avec React:**
+   - `React.ChangeEvent<HTMLInputElement>` pour typer l'événement
+   - Props avec callbacks: `(newScore: number) => void`
+
+**Concepts professionnels discutés:**
+
+**Q: Bottom-Up vs Top-Down development?**
+- Bottom-Up (ce qu'on fait): Composants isolés → assemblage
+  * ✅ Réutilisabilité, testabilité, Storybook
+  * ❌ Risque d'ajustements à l'intégration
+- Top-Down: Architecture globale → détails
+  * ✅ Pas de surprise, props exactes
+  * ❌ Moins réutilisable, pas testable isolément
+- **Réponse:** Les deux sont valides selon le contexte
+  * Design systems → Bottom-Up
+  * Features urgentes → Top-Down
+  * Apps complètes → Hybride
+
+**Q: Devrait-on fusionner CATEGORY_COLORS dans DEFAULT_SCORES?**
+- ❌ Non, car mélange données métier et présentation
+- ✅ Lookup table: séparation + flexibilité
+- Permet de changer le système de couleurs sans toucher aux types
+
+**Tests:**
+- ✅ Build TypeScript: Compilation sans erreur
+- ✅ Build Storybook: 7 stories générées
+
+**Commit:** `feat: create InputScore component with controlled input`
+
 ---
 
 ### 🔜 Prochaines étapes Session 3
@@ -592,7 +708,7 @@ On utilise:
 **Composants à créer (ordre ajusté) :**
 1. ✅ defaultScores.ts - Données initiales
 2. ✅ Button - Composant simple pour apprendre le workflow
-3. ⏳ InputScore - Composant clé avec input contrôlé
+3. ✅ InputScore - Composant clé avec input contrôlé
 4. ⏳ SummaryList - Map sur InputScore
 5. ⏳ ScoreCircle - Affichage dynamique du score
 6. ⏳ ResultFeedback - Affichage dynamique du feedback
@@ -608,4 +724,4 @@ On utilise:
 
 ---
 
-*Dernière mise à jour: 2025-11-02 (Session 3 - Architecture Sass 7-1 + Figma DS)*
+*Dernière mise à jour: 2025-11-03 (Session 3 - InputScore component avec controlled input pattern)*
