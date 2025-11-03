@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   gap: $spacing-200; // 16px entre les éléments
+  flex-wrap: nowrap; // Empêche le wrap des éléments
 
   // Background avec la couleur de fond exacte du design Figma
   background-color: var(--category-background);
@@ -62,6 +63,8 @@
   display: flex;
   align-items: center;
   gap: $spacing-100; // 8px
+  flex-shrink: 0; // Empêche le container de rétrécir
+  white-space: nowrap; // Empêche le texte de passer à la ligne
 
   // Typography - Text Preset 5 Bold
   @include text-preset-5-bold;
