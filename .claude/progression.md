@@ -701,6 +701,131 @@ onScoreChange={(newScore) => {
 
 **Commit:** `feat: create InputScore component with controlled input`
 
+#### Composant SummaryList créé ✅
+
+**Fichiers créés:**
+- `src/components/SummaryList/SummaryList.tsx` - Composant container
+- `src/components/SummaryList/SummaryList.module.scss` - Styles flexbox
+- `src/components/SummaryList/SummaryList.stories.tsx` - Documentation Storybook
+- Interface `SummaryListProps` mise à jour dans `types/index.ts`
+
+**Implémentation:**
+
+1. **Array.map() pour le rendu de listes:**
+```tsx
+{items.map((item) => (
+  <InputScore key={item.category} item={item} />
+))}
+```
+- Transforme un tableau de données en tableau de composants React
+- Évite la duplication de code (DRY)
+- Dynamique : s'adapte automatiquement au nombre d'éléments
+
+2. **La prop `key` (CRUCIALE) 🔑:**
+```tsx
+<InputScore
+  key={item.category}  // ← Identifiant unique et stable
+  item={item}
+/>
+```
+**Pourquoi key est obligatoire :**
+- React utilise `key` pour identifier chaque élément de la liste
+- Améliore les performances (algorithme de réconciliation)
+- Permet à React de savoir quel élément a changé/été ajouté/supprimé
+
+**Bonnes pratiques :**
+- ✅ Utiliser un identifiant unique et stable (`category`, `id`)
+- ❌ Ne JAMAIS utiliser l'index comme key (sauf liste vraiment statique)
+
+**Pourquoi pas l'index ?**
+```tsx
+// Si on supprime le premier élément, tous les index changent
+// React réutilise les composants au mauvais endroit → BUG
+```
+
+3. **Delegation Pattern (délégation de callback) 🎯:**
+```tsx
+// SummaryList reçoit : (category, newScore) => void
+// InputScore attend : (newScore) => void
+
+// Solution : enrober le callback
+<InputScore
+  onScoreChange={(newScore) => onScoreChange(item.category, newScore)}
+/>
+```
+
+**Flux de données :**
+1. InputScore appelle `onScoreChange(85)`
+2. La fonction fléchée reçoit 85
+3. Elle appelle le callback parent avec `(item.category, 85)`
+4. App reçoit `('Reaction', 85)` → sait quelle catégorie mettre à jour !
+
+4. **Closure (fermeture lexicale) 🔒:**
+```tsx
+items.map((item) => (
+  <InputScore
+    // Cette fonction fléchée "capture" item.category
+    // Chaque InputScore a sa propre fonction qui se "souvient"
+    // de son item.category même quand elle est appelée plus tard
+    onScoreChange={(newScore) => onScoreChange(item.category, newScore)}
+  />
+))
+```
+**Concept :** La fonction fléchée "se souvient" des variables de son contexte de création.
+
+**Storybook - 5 stories créées:**
+- **Default** : 4 catégories avec scores par défaut
+- **Interactive** : Démo complète avec useState + calcul de moyenne en temps réel
+- **LowScores** : Scores bas (10-25)
+- **HighScores** : Scores élevés (92-98)
+- **PerfectScores** : Tous les scores à 100
+
+**Story Interactive (highlight) :**
+```tsx
+const handleScoreChange = (category, newScore) => {
+  // Mise à jour immutable avec .map()
+  setScores(prevScores =>
+    prevScores.map(item =>
+      item.category === category
+        ? { ...item, score: newScore }  // Nouveau objet
+        : item                           // Objet inchangé
+    )
+  )
+}
+```
+Démontre le state management complet avec recalcul en temps réel.
+
+**Apprentissages Session 3 - Partie SummaryList:**
+
+1. **Array.map() pour React :**
+   - Transforme `[data]` en `[<Component />]`
+   - Pattern fondamental pour rendre des listes
+
+2. **key prop :**
+   - Obligatoire pour les listes
+   - Doit être unique et stable
+   - Jamais l'index (sauf exception)
+
+3. **Delegation Pattern :**
+   - Enrober un callback pour ajouter du contexte
+   - Permet aux enfants d'appeler le parent avec plus d'infos
+
+4. **Closure :**
+   - Fonction qui "capture" les variables de son environnement
+   - `item.category` est capturé par la fonction fléchée
+   - Chaque InputScore a sa propre closure
+
+5. **Immutable updates :**
+   - `.map()` crée un nouveau tableau
+   - Spread operator `{ ...item, score: newScore }` crée un nouvel objet
+   - React détecte les changements et re-render
+
+**Tests :**
+- ✅ Build TypeScript : Compilation sans erreur
+- ✅ Build Storybook : 5 stories générées
+
+**Commit :** `feat: create SummaryList component with .map() and delegation`
+
 ---
 
 ### 🔜 Prochaines étapes Session 3
@@ -709,7 +834,7 @@ onScoreChange={(newScore) => {
 1. ✅ defaultScores.ts - Données initiales
 2. ✅ Button - Composant simple pour apprendre le workflow
 3. ✅ InputScore - Composant clé avec input contrôlé
-4. ⏳ SummaryList - Map sur InputScore
+4. ✅ SummaryList - Map sur InputScore
 5. ⏳ ScoreCircle - Affichage dynamique du score
 6. ⏳ ResultFeedback - Affichage dynamique du feedback
 7. ⏳ ResultCard - Container gauche
@@ -724,4 +849,4 @@ onScoreChange={(newScore) => {
 
 ---
 
-*Dernière mise à jour: 2025-11-03 (Session 3 - InputScore component avec controlled input pattern)*
+*Dernière mise à jour: 2025-11-03 (Session 3 - SummaryList component avec .map() et delegation pattern)*
