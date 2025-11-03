@@ -1,0 +1,57 @@
+/**
+ * Styles du composant ScoreCircle
+ *
+ * Design pattern:
+ * - Cercle parfait avec border-radius: 50%
+ * - Gradient background (gradient-2 du design Figma)
+ * - Centrage flexbox pour le contenu
+ * - Text Presets Figma pour la typographie
+ */
+
+@use '../../styles/main' as *;
+
+.circle {
+  // Taille du cercle
+  width: 200px;
+  aspect-ratio: 1; // Hauteur = Largeur automatiquement (200px)
+
+  // Cercle parfait
+  border-radius: 50%; // 50% de la largeur/hauteur = cercle
+
+  // Gradient de fond (Figma gradient-2)
+  background: $gradient-2;
+
+  // Centrage du contenu avec flexbox
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // Centre verticalement
+  align-items: center; // Centre horizontalement
+  gap: $spacing-100; // 8px entre score et "of 100"
+
+  // Espacement intérieur
+  padding: $spacing-400; // 32px
+}
+
+.score {
+  // Typography - Text Preset 1 (72px ExtraBold)
+  @include text-preset-1;
+  color: $color-white;
+
+  // Reset margin
+  margin: 0;
+
+  // Pour éviter que le nombre dépasse
+  line-height: 1;
+}
+
+.maxScore {
+  // Typography - Text Preset 6 Medium (16px)
+  @include text-preset-6-medium;
+  color: $color-white;
+
+  // Texte légèrement transparent pour le rendre subtil
+  opacity: 0.5;
+
+  // Reset margin
+  margin: 0;
+}
