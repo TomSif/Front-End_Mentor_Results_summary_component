@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { ScoreCircle } from './components/ScoreCircle/ScoreCircle'
 import { SummaryList } from './components/SummaryList/SummaryList'
+import { Button } from './components/Button/Button'
 import { DEFAULT_SCORES } from './data/defaultScores'
+import { calculateScore } from './utils/calculateScore'
 import type { ScoreData, Category } from './types'
 
 function App() {
@@ -17,20 +20,31 @@ function App() {
     )
   }
 
-  // Calcul du score moyen
-  const averageScore = Math.round(
-    scores.reduce((sum, item) => sum + item.score, 0) / scores.length
-  )
+  const handleContinue = () => {
+    // Reset tous les scores à 0
+    setScores((prevScores) =>
+      prevScores.map((item) => ({
+        ...item,
+        score: 0,
+      }))
+    )
+  }
+
+  // Calcul du score global en temps réel avec la fonction utilitaire
+  const globalScore = calculateScore(scores)
 
   return (
-    <div style={{ padding: '40px', maxWidth: '500px', margin: '0 auto' }}>
-      <h1>Results Summary Component</h1>
-
-      <div style={{ marginBottom: '20px', padding: '20px', background: '#f0f0f0', borderRadius: '8px' }}>
-        <h2>Score moyen : {averageScore} / 100</h2>
+    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', display: 'flex', gap: '40px' }}>
+      {/* Colonne gauche : ScoreCircle */}
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <ScoreCircle score={globalScore} />
       </div>
 
-      <SummaryList items={scores} onScoreChange={handleScoreChange} />
+      {/* Colonne droite : SummaryList + Button */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <SummaryList items={scores} onScoreChange={handleScoreChange} />
+        <Button onClick={handleContinue}>Continue</Button>
+      </div>
     </div>
   )
 }
