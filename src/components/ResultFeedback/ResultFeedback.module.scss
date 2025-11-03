@@ -1,0 +1,43 @@
+/**
+ * Styles du composant ResultFeedback
+ *
+ * Design pattern:
+ * - Texte blanc (sera affiché sur gradient background dans ResultCard)
+ * - Title: Text Preset 4 Bold (24px)
+ * - Message: Text Preset 6 Medium (16px)
+ * - Centrage du texte
+ * - Espacement entre titre et message
+ */
+
+@use '../../styles/main' as *;
+
+.feedback {
+  // Centrage du texte
+  text-align: center;
+
+  // Espacement interne
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-100; // 8px entre title et message
+}
+
+.title {
+  // Typography - Text Preset 4 Bold (24px)
+  @include text-preset-4;
+  color: $color-white;
+
+  // Reset margin
+  margin: 0;
+}
+
+.message {
+  // Typography - Text Preset 6 Medium (16px)
+  @include text-preset-6-medium;
+  color: $color-white;
+
+  // Texte légèrement transparent pour le rendre subtil
+  opacity: 0.5;
+
+  // Reset margin
+  margin: 0;
+}
