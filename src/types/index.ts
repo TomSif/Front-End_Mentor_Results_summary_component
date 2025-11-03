@@ -108,10 +108,11 @@ export interface InputScoreProps {
 
 /**
  * Props du composant SummaryList
- * Affiche la liste des 4 catégories
+ * Affiche la liste des 4 catégories avec inputs interactifs
  */
 export interface SummaryListProps {
   items: ScoreData // Le tableau complet des 4 scores
+  onScoreChange: (category: Category, newScore: number) => void // Callback pour remonter les changements
 }
 
 /**

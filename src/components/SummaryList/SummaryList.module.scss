@@ -1,0 +1,17 @@
+/**
+ * Styles du composant SummaryList
+ *
+ * Container simple : flexbox vertical avec gap entre les InputScore
+ */
+
+@use '../../styles/main' as *;
+
+.summaryList {
+  // Flexbox vertical pour empiler les InputScore
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-200; // 16px entre chaque InputScore
+
+  // Largeur complète
+  width: 100%;
+}
