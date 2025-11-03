@@ -18,12 +18,13 @@
  */
 
 import type { InputScoreProps } from '../../types'
-import { CATEGORY_COLORS } from '../../data/defaultScores'
+import { CATEGORY_COLORS, CATEGORY_BACKGROUND_COLORS } from '../../data/defaultScores'
 import styles from './InputScore.module.scss'
 
 export function InputScore({ item, onScoreChange }: InputScoreProps) {
-  // Pattern lookup table : récupère la couleur via la clé category
+  // Pattern lookup table : récupère les couleurs via la clé category
   const color = CATEGORY_COLORS[item.category]
+  const backgroundColor = CATEGORY_BACKGROUND_COLORS[item.category]
 
   /**
    * Handler pour le changement de valeur de l'input
@@ -47,6 +48,7 @@ export function InputScore({ item, onScoreChange }: InputScoreProps) {
       style={
         {
           '--category-color': color,
+          '--category-background': backgroundColor,
         } as React.CSSProperties
       }
     >

@@ -2,8 +2,9 @@
  * Styles du composant InputScore
  *
  * Design pattern:
- * - Utilise CSS custom property --category-color pour la couleur dynamique
- * - Background avec la couleur à 5% d'opacité (ex: red-50, yellow-50)
+ * - Utilise CSS custom properties pour les couleurs dynamiques :
+ *   * --category-color : couleur principale (texte, icône)
+ *   * --category-background : couleur de fond (valeurs -50 du design Figma)
  * - Icône et texte avec la couleur principale
  */
 
@@ -15,8 +16,8 @@
   align-items: center;
   gap: $spacing-200; // 16px entre les éléments
 
-  // Background avec la couleur de catégorie (passée via CSS variable)
-  background-color: color-mix(in srgb, var(--category-color) 5%, transparent);
+  // Background avec la couleur de fond exacte du design Figma
+  background-color: var(--category-background);
 
   // Spacing et border radius
   padding: $spacing-200 $spacing-200; // 16px
@@ -26,7 +27,8 @@
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: color-mix(in srgb, var(--category-color) 10%, transparent);
+    // Légèrement plus foncé au hover (opacité réduite)
+    background-color: color-mix(in srgb, var(--category-background) 90%, var(--category-color));
   }
 }
 

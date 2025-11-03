@@ -27,6 +27,9 @@ import styles from './SummaryList.module.scss'
 export function SummaryList({ items, onScoreChange }: SummaryListProps) {
   return (
     <div className={styles.summaryList}>
+      {/* Titre de la section */}
+      <h2 className={styles.title}>Summary</h2>
+
       {/*
         .map() transforme le tableau de données en tableau de composants React
 

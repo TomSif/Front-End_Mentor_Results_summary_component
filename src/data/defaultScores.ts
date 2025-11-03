@@ -36,15 +36,28 @@ export const DEFAULT_SCORES: ScoreData = [
 ]
 
 /**
- * Couleurs associées à chaque catégorie
- * Utilisées pour le background et l'icône des InputScore
+ * Couleurs principales associées à chaque catégorie
+ * Utilisées pour l'icône et le texte de la catégorie
  *
- * Note : Ces couleurs sont définies dans variables.scss
- * mais on les exporte ici pour faciliter l'utilisation dans les composants
+ * Note : Ces couleurs correspondent aux couleurs 400/500/800 du design Figma
  */
 export const CATEGORY_COLORS = {
-  Reaction: 'hsl(0, 100%, 67%)',      // Light red
-  Memory: 'hsl(39, 100%, 56%)',       // Orangey yellow
-  Verbal: 'hsl(166, 100%, 37%)',      // Green teal
-  Visual: 'hsl(234, 85%, 45%)',       // Cobalt blue
+  Reaction: 'hsl(0, 100%, 67%)',      // Light red (Red-400)
+  Memory: 'hsl(39, 100%, 56%)',       // Orangey yellow (Yellow-400)
+  Verbal: 'hsl(166, 100%, 37%)',      // Green teal (Green-500)
+  Visual: 'hsl(234, 85%, 45%)',       // Cobalt blue (Blue-800)
+} as const
+
+/**
+ * Couleurs de fond associées à chaque catégorie
+ * Utilisées pour le background des InputScore
+ *
+ * Note : Ces couleurs correspondent aux couleurs -50 du design Figma
+ * (versions très claires des couleurs principales)
+ */
+export const CATEGORY_BACKGROUND_COLORS = {
+  Reaction: '#FFF6F6',  // Red-50
+  Memory: '#FFF9F4',    // Yellow-50
+  Verbal: '#F2FCF9',    // Green-50
+  Visual: '#F3F4FD',    // Blue-50
 } as const
