@@ -826,27 +826,268 @@ Démontre le state management complet avec recalcul en temps réel.
 
 **Commit :** `feat: create SummaryList component with .map() and delegation`
 
+#### Composant ScoreCircle créé ✅
+
+**Fichiers créés:**
+- `src/components/ScoreCircle/ScoreCircle.tsx`
+- `src/components/ScoreCircle/ScoreCircle.module.scss`
+- `src/components/ScoreCircle/ScoreCircle.stories.tsx` (8 stories)
+
+**Implémentation:**
+
+1. **Composant présentationnel pur :**
+```tsx
+function ScoreCircle({ score, maxScore = 100 }: ScoreCircleProps) {
+  return (
+    <div className={styles.circle}>
+      <span>{score}</span>
+      <span>of {maxScore}</span>
+    </div>
+  )
+}
+```
+- Pas de state, juste affichage
+- Reçoit le score calculé via props
+- Props avec valeur par défaut (`maxScore = 100`)
+
+2. **Cercle parfait en CSS :**
+```scss
+.circle {
+  width: 200px;
+  aspect-ratio: 1;      // Hauteur = Largeur
+  border-radius: 50%;   // Cercle parfait !
+}
+```
+**Pourquoi 50% ?** Sur un carré, 50% de border-radius transforme en cercle.
+
+3. **Gradient et Typography Figma :**
+- Background: `$gradient-2` (violet dégradé)
+- Score: Text Preset 1 (72px ExtraBold)
+- "of 100": Text Preset 6 Medium (16px) avec opacity 0.5
+
+4. **Réutilisabilité démontrée :**
+- 8 stories Storybook dont CustomMaxScore (8/10), FiveStars (4/5)
+- Montre qu'on peut utiliser le composant pour n'importe quelle échelle
+
+**Apprentissages:**
+- Pattern présentationnel vs container
+- `border-radius: 50%` vs valeur fixe en px
+- `aspect-ratio: 1` pour garder un carré parfait
+
+**Commit:** `feat: create ScoreCircle component with gradient background`
+
 ---
 
-### 🔜 Prochaines étapes Session 3
+#### Application interactive complète ✅
+
+**Décisions UX (discussion architecture) :**
+
+**Q: Le bouton "Continue" devrait faire quoi ?**
+- Option A: Calcul en temps réel (bouton inutile)
+- Option B: Calcul au clic (pas de feedback immédiat)
+- **Option choisie:** Calcul temps réel + Reset to zero
+
+**Pourquoi reset to ZERO (pas default) ?**
+```
+Reset to default [80,92,61,72]:
+User clique → Aucun changement visible → Confusion ❌
+
+Reset to zero [0,0,0,0]:
+User clique → Changement immédiat → Comprend l'interactivité ✅
+```
+
+**Flow UX final :**
+1. Chargement: [80,92,61,72] → 76 → "Great"
+2. Modification input: Recalcul temps réel ⚡
+3. Clic "Continue": [0,0,0,0] → 0 → "Ready to start?"
+4. Remplissage: Recalcul temps réel
+5. Cycle...
+
+**Implémentation App.tsx :**
+```tsx
+// Calcul temps réel avec fonction utilitaire
+const globalScore = calculateScore(scores)
+
+// Reset à 0
+const handleContinue = () => {
+  setScores(prevScores =>
+    prevScores.map(item => ({ ...item, score: 0 }))
+  )
+}
+
+<ScoreCircle score={globalScore} />
+<SummaryList items={scores} onScoreChange={handleScoreChange} />
+<Button onClick={handleContinue}>Continue</Button>
+```
+
+**Layout 2 colonnes :**
+- Gauche: ScoreCircle (affichage résultat)
+- Droite: SummaryList + Button
+
+**Commit:** `feat: implement interactive UX flow with reset functionality`
+
+---
+
+#### Améliorations design et UX ✅
+
+**1. Titre "Summary" ajouté**
+- Observation de Tom: Le design montre un titre "Summary"
+- Ajout d'un `<h2>` dans SummaryList
+- Text Preset 5 Bold (18px)
+
+**2. Couleurs de fond Figma exactes**
+- Problème: `color-mix()` n'était pas exactement le design
+- Solution: Nouveau tableau `CATEGORY_BACKGROUND_COLORS`
+```typescript
+export const CATEGORY_BACKGROUND_COLORS = {
+  Reaction: '#FFF6F6',  // Red-50
+  Memory: '#FFF9F4',    // Yellow-50
+  Verbal: '#F2FCF9',    // Green-50
+  Visual: '#F3F4FD',    // Blue-50
+}
+```
+- Pattern lookup table appliqué (cohérent avec CATEGORY_COLORS)
+
+**3. Message spécial pour score 0**
+- Idée de Tom: Guider l'utilisateur après le reset
+- Ajout dans `FEEDBACK_DATA` pour score === 0
+```typescript
+{
+  min: 0,
+  max: 0,
+  title: 'Ready to start?',
+  message: 'Fill in your scores in each category to see your result.',
+}
+```
+- Approche data-driven (pas de condition spéciale dans le code)
+
+**Commit:** `fix: add Summary title and use Figma background colors`
+**Commit:** `feat: add special feedback message for score zero (reset state)`
+
+---
+
+#### Fixes CSS professionnels ✅
+
+**1. Layout shift sur input focus**
+- Problème identifié par Tom: Micro-décalage au focus (2px)
+- Impact: CLS (Cumulative Layout Shift) - mauvais pour UX et SEO
+```scss
+.input {
+  border-bottom: 2px solid transparent;  // Réserve l'espace
+  transform: translateY(+1px);           // Alignement parfait
+
+  &:focus {
+    border-bottom: 2px solid var(--category-color);
+  }
+}
+
+.maxScore {
+  border-bottom: 2px solid transparent;  // Même espace
+  transform: translateY(+1px);           // Cohérence
+}
+```
+- Principe: 1 bouton = 1 action = simplicité UX
+- **Apprentissage:** Attention aux détails qui font la qualité professionnelle
+
+**Commit:** `fix: prevent layout shift on input focus and add dev preview`
+
+**2. Text wrapping dans InputScore**
+- Problème: "/ 100" passait à la ligne (seulement dans 2 premières catégories)
+- Cause: `.scoreContainer` pouvait shrink en flexbox
+```scss
+.inputScore {
+  flex-wrap: nowrap;  // Empêche le wrap au niveau parent
+}
+
+.scoreContainer {
+  flex-shrink: 0;     // Ne peut pas rétrécir
+  white-space: nowrap; // Texte sur une ligne
+}
+```
+- **Apprentissage:** Debug CSS flexbox multi-niveaux
+
+**Commit:** `fix: prevent text wrapping in InputScore component`
+
+---
+
+#### Concepts professionnels discutés
+
+**1. Bottom-Up vs Top-Down development :**
+- Bottom-Up (notre approche): Composants isolés → assemblage
+- Top-Down: Architecture globale → détails
+- Les deux sont valides selon le contexte
+- Design systems → Bottom-Up
+
+**2. Séparation données vs présentation :**
+- ❌ Ajouter `color` et `className` dans `DEFAULT_SCORES`
+- ✅ Lookup table séparée `CATEGORY_BACKGROUND_COLORS`
+- Permet de changer le système de couleurs sans toucher aux types
+
+**3. UX decision-making :**
+- Toujours penser à l'effet visible (reset to zero vs default)
+- 1 bouton = 1 action (simplicité)
+- Guider l'utilisateur avec des messages appropriés
+
+**4. Data-driven architecture :**
+- Préférer les tableaux de configuration aux conditions dans le code
+- Plus facile à maintenir et modifier
+- Pattern appliqué partout: CATEGORY_COLORS, FEEDBACK_DATA, etc.
+
+---
+
+### Métriques Session 3 (suite)
+
+**Temps passé:** ~6-7 heures (développement + discussions architecturales)
+
+**Composants créés:** 3 nouveaux composants
+- InputScore (avec controlled input pattern)
+- SummaryList (avec .map() et delegation)
+- ScoreCircle (composant présentationnel)
+
+**Commits:** 9 commits
+```
+7bdadaa - feat: create InputScore component with controlled input
+bc1c274 - docs: update progression after InputScore component creation
+f415a0b - feat: create SummaryList component with .map() and delegation
+f7bc9f2 - docs: update progression after SummaryList component creation
+3206fea - fix: add Summary title and use Figma background colors
+a94f385 - fix: prevent layout shift on input focus and add dev preview
+0c91360 - feat: create ScoreCircle component with gradient background
+159f33a - feat: implement interactive UX flow with reset functionality
+0edcedf - fix: prevent text wrapping in InputScore component
+2c3beab - feat: add special feedback message for score zero (reset state)
+```
+
+**Tests:** 22 tests qui passent (17 getFeedback + 5 calculateScore)
+
+**Prototype fonctionnel:** ✅ Application interactive complète
+- Calcul temps réel
+- Reset to zero
+- Layout 2 colonnes
+- 4 composants assemblés
+
+---
+
+### 🔜 Prochaines étapes Session 3 (reprise)
 
 **Composants à créer (ordre ajusté) :**
 1. ✅ defaultScores.ts - Données initiales
 2. ✅ Button - Composant simple pour apprendre le workflow
-3. ✅ InputScore - Composant clé avec input contrôlé
-4. ✅ SummaryList - Map sur InputScore
-5. ⏳ ScoreCircle - Affichage dynamique du score
-6. ⏳ ResultFeedback - Affichage dynamique du feedback
-7. ⏳ ResultCard - Container gauche
-8. ⏳ SummaryPanel - Container droit
-9. ⏳ App.tsx - State management final
+3. ✅ InputScore - Composant clé avec input contrôlé + fixes CSS
+4. ✅ SummaryList - Map sur InputScore + titre "Summary"
+5. ✅ ScoreCircle - Cercle parfait avec gradient
+6. ✅ App.tsx - Prototype interactif fonctionnel
+7. ⏳ ResultFeedback - Affichage dynamique du feedback
+8. ⏳ ResultCard - Container gauche (ScoreCircle + ResultFeedback)
+9. ⏳ SummaryPanel - Container droit (SummaryList + Button)
+10. ⏳ App.tsx final - Polish du layout
 
-**Pour chaque composant:**
-- Composant React + TypeScript
-- Styles SASS (modules) avec design system Figma
-- Story Storybook
-- Commit + Doc
+**Objectif prochaine session:**
+- Créer ResultFeedback (utilise `getFeedback()`)
+- Créer les containers (ResultCard, SummaryPanel)
+- Finaliser le layout
+- Responsive design (optionnel)
 
 ---
 
-*Dernière mise à jour: 2025-11-03 (Session 3 - SummaryList component avec .map() et delegation pattern)*
+*Dernière mise à jour: 2025-11-03 (Session 3 - ScoreCircle + App interactive + UX improvements)*
