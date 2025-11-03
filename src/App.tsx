@@ -1,34 +1,37 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { SummaryList } from './components/SummaryList/SummaryList'
+import { DEFAULT_SCORES } from './data/defaultScores'
+import type { ScoreData, Category } from './types'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [scores, setScores] = useState<ScoreData>(DEFAULT_SCORES)
+
+  const handleScoreChange = (category: Category, newScore: number) => {
+    console.log(`Category ${category} changed to ${newScore}`)
+
+    // Mise à jour immutable du state
+    setScores((prevScores) =>
+      prevScores.map((item) =>
+        item.category === category ? { ...item, score: newScore } : item
+      )
+    )
+  }
+
+  // Calcul du score moyen
+  const averageScore = Math.round(
+    scores.reduce((sum, item) => sum + item.score, 0) / scores.length
+  )
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{ padding: '40px', maxWidth: '500px', margin: '0 auto' }}>
+      <h1>Results Summary Component</h1>
+
+      <div style={{ marginBottom: '20px', padding: '20px', background: '#f0f0f0', borderRadius: '8px' }}>
+        <h2>Score moyen : {averageScore} / 100</h2>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount(count => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <SummaryList items={scores} onScoreChange={handleScoreChange} />
+    </div>
   )
 }
 

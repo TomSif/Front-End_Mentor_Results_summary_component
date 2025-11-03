@@ -28,7 +28,11 @@
 
   &:hover {
     // Légèrement plus foncé au hover (opacité réduite)
-    background-color: color-mix(in srgb, var(--category-background) 90%, var(--category-color));
+    background-color: color-mix(
+      in srgb,
+      var(--category-background) 90%,
+      var(--category-color)
+    );
   }
 }
 
@@ -76,8 +80,11 @@
   // Largeur fixe pour l'input
   width: 50px;
   text-align: right;
+  border-bottom: 2px solid transparent;
+  transform: translateY(+1px);
 
   // Enlève les flèches du input type="number"
+  appearance: textfield;
   -moz-appearance: textfield;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -99,6 +106,8 @@
 
 .maxScore {
   // Typography - Text Preset 6 Medium
+  border-bottom: 2px solid transparent;
+  transform: translateY(+1px);
   @include text-preset-6-medium;
   color: color-mix(in srgb, $color-navy-950 50%, transparent);
   opacity: 0.5;
