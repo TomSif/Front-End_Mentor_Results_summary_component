@@ -124,6 +124,16 @@ export interface SummaryListProps {
 }
 
 /**
+ * Props du composant SummaryPanel
+ * Container qui combine SummaryList + Button (panneau droit)
+ */
+export interface SummaryPanelProps {
+  items: ScoreData // Le tableau complet des 4 scores
+  onScoreChange: (category: Category, newScore: number) => void // Callback pour remonter les changements
+  onContinue: () => void // Callback pour le bouton Continue
+}
+
+/**
  * Props du composant Button
  * Bouton générique réutilisable
  */

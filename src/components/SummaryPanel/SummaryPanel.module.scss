@@ -1,0 +1,30 @@
+/**
+ * Styles du composant SummaryPanel
+ *
+ * Design pattern:
+ * - Container blanc (panneau droit)
+ * - Layout flexbox vertical
+ * - Espacement entre SummaryList et Button
+ * - Padding pour aérer le contenu
+ */
+
+@use '../../styles/main' as *;
+
+.panel {
+  // Background blanc
+  background-color: $color-white;
+
+  // Border radius pour les coins arrondis
+  border-radius: $border-radius-lg; // 24px
+
+  // Layout flexbox vertical
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-400; // 32px entre SummaryList et Button
+
+  // Padding interne
+  padding: $spacing-400 $spacing-400; // 32px
+
+  // Largeur minimale pour assurer un bon rendu
+  min-width: 368px;
+}
