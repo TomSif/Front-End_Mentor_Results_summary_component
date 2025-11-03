@@ -1082,12 +1082,180 @@ a94f385 - fix: prevent layout shift on input focus and add dev preview
 9. ⏳ SummaryPanel - Container droit (SummaryList + Button)
 10. ⏳ App.tsx final - Polish du layout
 
-**Objectif prochaine session:**
-- Créer ResultFeedback (utilise `getFeedback()`)
-- Créer les containers (ResultCard, SummaryPanel)
-- Finaliser le layout
-- Responsive design (optionnel)
+---
+
+### 2025-11-03 - Session 3 (Suite): Composants Containers et Finalisation
+
+#### Composants créés ✅
+
+**1. ResultFeedback - Affichage dynamique du feedback**
+- Composant présentationnel qui utilise `getFeedback()`
+- Affiche titre et message selon le score
+- Text Preset 4 Bold pour le titre (24px)
+- Text Preset 6 Medium pour le message (16px)
+- Texte blanc avec opacity 0.5 pour le message
+- 13 stories Storybook avec tous les niveaux de feedback
+- Background gradient dans les stories pour prévisualisation
+
+**2. ResultCard - Container gauche**
+- Combine ScoreCircle + ResultFeedback
+- Gradient background (gradient-1 du design Figma)
+- Titre "Your Result" en haut (Text Preset 5 Bold, opacity 0.7)
+- Layout flexbox vertical avec centrage
+- Border radius 24px
+- Gap 24px entre les éléments
+- Min-width: 368px
+- 7 stories Storybook (Default, Zero, LowScore, Average, Good, Excellent, Perfect)
+
+**3. SummaryPanel - Container droit**
+- Combine SummaryList + Button
+- Background blanc
+- Layout flexbox vertical
+- Gap 32px entre SummaryList et Button
+- Border radius 24px
+- Min-width: 368px
+- 5 stories Storybook avec Interactive demo complète
+
+#### Refactoring App.tsx ✅
+
+**Avant (version prototype):**
+```tsx
+// Imports directs des composants individuels
+import { ScoreCircle } from './components/ScoreCircle/ScoreCircle'
+import { SummaryList } from './components/SummaryList/SummaryList'
+import { Button } from './components/Button/Button'
+
+// Layout avec styles inline
+<div style={{ padding: '40px', ... }}>
+  <div style={{ flex: 1, ... }}>
+    <ScoreCircle score={globalScore} />
+  </div>
+  <div style={{ flex: 1, ... }}>
+    <SummaryList items={scores} onScoreChange={handleScoreChange} />
+    <Button onClick={handleContinue}>Continue</Button>
+  </div>
+</div>
+```
+
+**Après (version finale):**
+```tsx
+// Imports des containers uniquement
+import { ResultCard } from './components/ResultCard/ResultCard'
+import { SummaryPanel } from './components/SummaryPanel/SummaryPanel'
+
+// Layout avec CSS Module
+<div className={styles.app}>
+  <ResultCard score={globalScore} />
+  <SummaryPanel
+    items={scores}
+    onScoreChange={handleScoreChange}
+    onContinue={handleContinue}
+  />
+</div>
+```
+
+**App.module.scss créé:**
+```scss
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-500; // 40px
+  display: flex;
+  gap: $spacing-500; // 40px
+  align-items: center;
+  min-height: 100vh;
+}
+```
+
+**Bénéfices du refactoring:**
+- Code plus propre et maintenable
+- Meilleure séparation des responsabilités
+- Composition claire de containers
+- Styles centralisés dans CSS Module
+- Architecture finale alignée avec le plan initial
+
+#### Architecture complète finalisée ✅
+
+```
+App (state management + layout)
+├── ResultCard (panneau gauche - gradient)
+│   ├── ScoreCircle (cercle avec score)
+│   └── ResultFeedback (titre + message dynamique)
+└── SummaryPanel (panneau droit - blanc)
+    ├── SummaryList (liste des catégories)
+    │   └── InputScore (×4 - inputs contrôlés)
+    └── Button (action Continue)
+```
+
+#### Tous les composants Storybook ✅
+
+**9 composants documentés:**
+1. ✅ Button - 4 stories
+2. ✅ InputScore - 7 stories
+3. ✅ SummaryList - 5 stories
+4. ✅ ScoreCircle - 8 stories
+5. ✅ ResultFeedback - 13 stories (tous les niveaux)
+6. ✅ ResultCard - 7 stories
+7. ✅ SummaryPanel - 5 stories
+
+**Total: 49 stories créées**
+
+#### Commits Session 3 (suite) ✅
+
+```
+6b094eb - feat: create ResultFeedback component with dynamic feedback display
+b7ccfff - feat: create ResultCard container component
+2a1a2fd - feat: create SummaryPanel container component
+[à venir] - refactor: finalize App.tsx with container composition and CSS Module
+```
+
+#### Métriques Session 3 complète
+
+**Temps total:** ~8-9 heures (sur 2 jours)
+
+**Composants créés:** 7 composants
+- Button (session 3 jour 1)
+- InputScore (session 3 jour 1)
+- SummaryList (session 3 jour 1)
+- ScoreCircle (session 3 jour 1)
+- ResultFeedback (session 3 jour 2)
+- ResultCard (session 3 jour 2)
+- SummaryPanel (session 3 jour 2)
+
+**Tests:** 22 tests qui passent (100% coverage des utils)
+
+**Storybook:** 49 stories documentées
+
+**Application complète:** ✅ Fonctionnelle et interactive
+- Calcul temps réel
+- Reset to zero
+- Layout 2 colonnes professionnel
+- Architecture container/presentational
+- Design system complet appliqué
 
 ---
 
-*Dernière mise à jour: 2025-11-03 (Session 3 - ScoreCircle + App interactive + UX improvements)*
+### 🎯 État du Projet
+
+**Phase actuelle:** Application fonctionnelle complète ✅
+
+**Fonctionnalités implémentées:**
+- ✅ Chargement données DEFAULT_SCORES
+- ✅ Calcul automatique score global (moyenne arrondie)
+- ✅ Feedback dynamique par tranches (11 niveaux incluant score 0)
+- ✅ Modification interactive des scores
+- ✅ Reset complet avec bouton Continue
+- ✅ Layout deux colonnes desktop
+- ✅ Tous les composants documentés Storybook
+- ✅ Tests unitaires complets (22 tests)
+
+**Reste à faire (optionnel):**
+- ⏳ Responsive design mobile (375px)
+- ⏳ Animations/transitions
+- ⏳ Tests de composants React (Vitest + Testing Library)
+- ⏳ Accessibility audit complet
+- ⏳ Performance optimizations
+
+---
+
+*Dernière mise à jour: 2025-11-03 (Session 3 complète - Application finalisée)*
