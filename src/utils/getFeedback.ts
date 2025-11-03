@@ -29,6 +29,13 @@ const FEEDBACK_DATA: Array<{
 }> = [
   {
     min: 0,
+    max: 0,
+    level: 'terrible',
+    title: 'Ready to start?',
+    message: 'Fill in your scores in each category to see your result.',
+  },
+  {
+    min: 1,
     max: 9,
     level: 'terrible',
     title: 'Terrible',

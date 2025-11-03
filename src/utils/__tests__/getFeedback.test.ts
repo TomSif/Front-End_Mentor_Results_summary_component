@@ -41,10 +41,18 @@ describe('getFeedback', () => {
    * On teste le début, le milieu et la fin de chaque tranche
    */
 
-  test('score 0-9 : retourne "terrible"', () => {
-    expect(getFeedback(0).level).toBe('terrible')
+  test('score 0 : retourne message de démarrage', () => {
+    const result = getFeedback(0)
+    expect(result.level).toBe('terrible')
+    expect(result.title).toBe('Ready to start?')
+    expect(result.message).toContain('Fill in your scores')
+  })
+
+  test('score 1-9 : retourne "terrible"', () => {
+    expect(getFeedback(1).level).toBe('terrible')
     expect(getFeedback(5).level).toBe('terrible')
     expect(getFeedback(9).level).toBe('terrible')
+    expect(getFeedback(1).title).toBe('Terrible')
   })
 
   test('score 10-19 : retourne "bad"', () => {
