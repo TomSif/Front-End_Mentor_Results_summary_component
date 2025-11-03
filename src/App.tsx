@@ -1,10 +1,30 @@
+/**
+ * Application principale - Results Summary Component
+ *
+ * Architecture:
+ * - State management avec useState pour les scores
+ * - Calcul en temps réel du score global
+ * - Composition de containers: ResultCard + SummaryPanel
+ * - Reset des scores à 0 via le bouton Continue
+ *
+ * Structure:
+ * App
+ * ├── ResultCard (panneau gauche avec gradient)
+ * │   ├── ScoreCircle
+ * │   └── ResultFeedback
+ * └── SummaryPanel (panneau droit blanc)
+ *     ├── SummaryList
+ *     │   └── InputScore (×4)
+ *     └── Button
+ */
+
 import { useState } from 'react'
-import { ScoreCircle } from './components/ScoreCircle/ScoreCircle'
-import { SummaryList } from './components/SummaryList/SummaryList'
-import { Button } from './components/Button/Button'
+import { ResultCard } from './components/ResultCard/ResultCard'
+import { SummaryPanel } from './components/SummaryPanel/SummaryPanel'
 import { DEFAULT_SCORES } from './data/defaultScores'
 import { calculateScore } from './utils/calculateScore'
 import type { ScoreData, Category } from './types'
+import styles from './App.module.scss'
 
 function App() {
   const [scores, setScores] = useState<ScoreData>(DEFAULT_SCORES)
@@ -21,6 +41,7 @@ function App() {
   }
 
   const handleContinue = () => {
+    console.log('Continue clicked - Resetting all scores to 0')
     // Reset tous les scores à 0
     setScores((prevScores) =>
       prevScores.map((item) => ({
@@ -34,17 +55,13 @@ function App() {
   const globalScore = calculateScore(scores)
 
   return (
-    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', display: 'flex', gap: '40px' }}>
-      {/* Colonne gauche : ScoreCircle */}
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ScoreCircle score={globalScore} />
-      </div>
-
-      {/* Colonne droite : SummaryList + Button */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <SummaryList items={scores} onScoreChange={handleScoreChange} />
-        <Button onClick={handleContinue}>Continue</Button>
-      </div>
+    <div className={styles.app}>
+      <ResultCard score={globalScore} />
+      <SummaryPanel
+        items={scores}
+        onScoreChange={handleScoreChange}
+        onContinue={handleContinue}
+      />
     </div>
   )
 }

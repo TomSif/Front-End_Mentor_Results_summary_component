@@ -1,0 +1,28 @@
+/**
+ * Styles de l'application principale
+ *
+ * Design pattern:
+ * - Layout deux colonnes avec flexbox
+ * - Centrage sur la page
+ * - Espacement entre les deux panneaux
+ * - Responsive (TODO: mobile version)
+ */
+
+@use './styles/main' as *;
+
+.app {
+  // Centrage de l'application sur la page
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-500; // 40px
+
+  // Layout flexbox horizontal
+  display: flex;
+  gap: $spacing-500; // 40px entre ResultCard et SummaryPanel
+
+  // Alignement vertical centré
+  align-items: center;
+
+  // Hauteur minimale pour centrer verticalement sur la page
+  min-height: 100vh;
+}
