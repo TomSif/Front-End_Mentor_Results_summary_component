@@ -87,7 +87,7 @@ export const Visual: Story = {
  * Permet de tester le changement de score en temps réel
  */
 export const Interactive = () => {
-  const [score, setScore] = useState(80)
+  const [score, setScore] = useState<number | null>(80)
 
   return (
     <div style={{ width: '300px' }}>
@@ -103,7 +103,7 @@ export const Interactive = () => {
         }}
       />
       <p style={{ marginTop: '20px', fontSize: '14px', color: '#666' }}>
-        Score actuel: {score}
+        Score actuel: {score ?? 'vide'}
       </p>
     </div>
   )

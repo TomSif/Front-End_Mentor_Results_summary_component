@@ -30,6 +30,15 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background-color: #ecf2ff;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

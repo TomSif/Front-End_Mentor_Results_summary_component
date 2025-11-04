@@ -57,7 +57,7 @@ export const Default: Story = {
 export const Interactive = () => {
   const [scores, setScores] = useState<ScoreData>(DEFAULT_SCORES)
 
-  const handleScoreChange = (category: Category, newScore: number) => {
+  const handleScoreChange = (category: Category, newScore: number | null) => {
     console.log(`Category ${category} changed to ${newScore}`)
 
     // Mise à jour immutable du state avec .map()
@@ -71,9 +71,9 @@ export const Interactive = () => {
     )
   }
 
-  // Calcul du score moyen en temps réel
+  // Calcul du score moyen en temps réel (traite null comme 0)
   const averageScore = Math.round(
-    scores.reduce((sum, item) => sum + item.score, 0) / scores.length
+    scores.reduce((sum, item) => sum + (item.score ?? 0), 0) / scores.length
   )
 
   return (
@@ -92,7 +92,7 @@ export const Interactive = () => {
         <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px' }}>
           {scores.map((item) => (
             <li key={item.category}>
-              {item.category}: {item.score}
+              {item.category}: {item.score ?? 'vide'}
             </li>
           ))}
         </ul>

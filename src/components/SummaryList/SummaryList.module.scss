@@ -23,4 +23,8 @@
 
   // Reset margin par défaut du h2
   margin: 0;
+
+  @include mobile {
+    padding-top: 32px;
+  }
 }

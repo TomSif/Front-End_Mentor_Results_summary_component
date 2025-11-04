@@ -29,12 +29,21 @@ export function InputScore({ item, onScoreChange }: InputScoreProps) {
   /**
    * Handler pour le changement de valeur de l'input
    * - Extrait la nouvelle valeur de l'événement
-   * - Convertit en nombre avec Number()
+   * - Si vide, passe null au parent
+   * - Sinon, convertit en nombre avec Number()
    * - Valide que c'est un nombre entre 0 et 100
    * - Appelle le callback parent avec la nouvelle valeur
    */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newScore = Number(event.target.value)
+    const value = event.target.value
+
+    // Si l'input est vide, on passe null
+    if (value === '') {
+      onScoreChange(null)
+      return
+    }
+
+    const newScore = Number(value)
 
     // Validation : score entre 0 et 100
     if (newScore >= 0 && newScore <= 100) {
@@ -60,10 +69,10 @@ export function InputScore({ item, onScoreChange }: InputScoreProps) {
 
       {/* Container pour l'input et la notation */}
       <div className={styles.scoreContainer}>
-        {/* Input contrôlé : la valeur vient de item.score */}
+        {/* Input contrôlé : la valeur vient de item.score (ou chaîne vide si null) */}
         <input
           type="number"
-          value={item.score}
+          value={item.score ?? ''}
           onChange={handleChange}
           min="0"
           max="100"

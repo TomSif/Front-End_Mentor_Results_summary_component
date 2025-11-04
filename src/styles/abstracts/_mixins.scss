@@ -7,7 +7,7 @@
 // Responsive breakpoints
 // -----------------------------------------------------------------------------
 @mixin mobile {
-  @media (max-width: 767px) {
+  @media (max-width: 475px) {
     @content;
   }
 }

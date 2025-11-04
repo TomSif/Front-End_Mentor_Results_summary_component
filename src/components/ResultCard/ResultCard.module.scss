@@ -21,13 +21,28 @@
   display: flex;
   flex-direction: column;
   align-items: center; // Centre horizontalement
+  justify-content: center; // Centre verticalement
   gap: $spacing-300; // 24px entre les éléments
 
   // Padding interne
   padding: $spacing-400 $spacing-500; // 32px top/bottom, 40px left/right
 
-  // Largeur minimale pour assurer un bon rendu
-  min-width: 368px;
+  // === MOBILE : Hauteur auto ===
+  @include mobile {
+    min-width: 100%;
+    border-radius: 0 0 $border-radius-lg $border-radius-lg; // Coins arrondis uniquement en bas
+    position: relative;
+    z-index: 2;
+  }
+
+  // === DESKTOP : Hauteur fixe pour alignement avec SummaryPanel ===
+  @include desktop {
+    min-width: 370px;
+    max-width: 370px;
+    height: 512px; // Hauteur fixe en desktop
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .title {

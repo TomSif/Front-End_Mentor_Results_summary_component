@@ -29,7 +29,7 @@ import styles from './App.module.scss'
 function App() {
   const [scores, setScores] = useState<ScoreData>(DEFAULT_SCORES)
 
-  const handleScoreChange = (category: Category, newScore: number) => {
+  const handleScoreChange = (category: Category, newScore: number | null) => {
     console.log(`Category ${category} changed to ${newScore}`)
 
     // Mise à jour immutable du state
@@ -41,12 +41,12 @@ function App() {
   }
 
   const handleContinue = () => {
-    console.log('Continue clicked - Resetting all scores to 0')
-    // Reset tous les scores à 0
+    console.log('Continue clicked - Resetting all scores to null')
+    // Reset tous les scores à null (champs vides, mais ResultCard affiche 0)
     setScores(prevScores =>
       prevScores.map(item => ({
         ...item,
-        score: 0,
+        score: null,
       }))
     )
   }

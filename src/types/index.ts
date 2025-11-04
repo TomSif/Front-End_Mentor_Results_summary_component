@@ -21,7 +21,7 @@ export type Category = 'Reaction' | 'Memory' | 'Verbal' | 'Visual'
  */
 export interface ScoreItem {
   category: Category // Utilise le type Category défini ci-dessus
-  score: number // Un nombre entre 0 et 100
+  score: number | null // Un nombre entre 0 et 100, ou null si pas encore saisi
   icon: string // Chemin vers l'icône SVG
 }
 
@@ -111,7 +111,7 @@ export interface SummaryItemProps {
  */
 export interface InputScoreProps {
   item: ScoreItem // Un objet du tableau data.json
-  onScoreChange: (newScore: number) => void // Callback pour remonter le changement
+  onScoreChange: (newScore: number | null) => void // Callback pour remonter le changement (null si input vide)
 }
 
 /**
@@ -120,7 +120,7 @@ export interface InputScoreProps {
  */
 export interface SummaryListProps {
   items: ScoreData // Le tableau complet des 4 scores
-  onScoreChange: (category: Category, newScore: number) => void // Callback pour remonter les changements
+  onScoreChange: (category: Category, newScore: number | null) => void // Callback pour remonter les changements
 }
 
 /**
@@ -129,7 +129,7 @@ export interface SummaryListProps {
  */
 export interface SummaryPanelProps {
   items: ScoreData // Le tableau complet des 4 scores
-  onScoreChange: (category: Category, newScore: number) => void // Callback pour remonter les changements
+  onScoreChange: (category: Category, newScore: number | null) => void // Callback pour remonter les changements
   onContinue: () => void // Callback pour le bouton Continue
 }
 

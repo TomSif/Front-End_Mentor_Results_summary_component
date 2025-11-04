@@ -15,16 +15,33 @@
   background-color: $color-white;
 
   // Border radius pour les coins arrondis
-  border-radius: $border-radius-lg; // 24px
+  border-radius: 0 $border-radius-lg $border-radius-lg 0; // 24px
 
   // Layout flexbox vertical
   display: flex;
   flex-direction: column;
+  justify-content: space-between; // Espace entre SummaryList et Button
   gap: $spacing-400; // 32px entre SummaryList et Button
 
   // Padding interne
   padding: $spacing-400 $spacing-400; // 32px
 
-  // Largeur minimale pour assurer un bon rendu
-  min-width: 368px;
+  // === MOBILE : Hauteur auto ===
+  @include mobile {
+    min-width: 100%;
+    margin-top: -32px;
+    border-radius: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  // === DESKTOP : Hauteur fixe pour alignement avec ResultCard ===
+  @include desktop {
+    min-width: 400px;
+    height: 512px; // Hauteur fixe en desktop (identique à ResultCard)
+    padding-left: 55px;
+    margin-left: -20px;
+    position: relative;
+    z-index: 1;
+  }
 }

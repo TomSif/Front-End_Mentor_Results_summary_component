@@ -21,7 +21,8 @@ export function calculateScore(scores: ScoreData): number {
   // Étape 1 : Extraire juste les scores (nombres) du tableau d'objets
   // scores = [{ score: 80 }, { score: 92 }, ...]
   // → on veut juste [80, 92, 61, 72]
-  const scoreValues = scores.map(item => item.score)
+  // Si score est null, on le traite comme 0
+  const scoreValues = scores.map(item => item.score ?? 0)
 
   // Étape 2 : Sommer tous les scores avec reduce
   // Départ : sum = 0
