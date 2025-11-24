@@ -37,7 +37,8 @@
 
   // === DESKTOP : Hauteur fixe pour alignement avec ResultCard ===
   @include desktop {
-    min-width: 400px;
+    width: 52%;
+    max-width: 400px;
     height: 512px; // Hauteur fixe en desktop (identique à ResultCard)
     padding-left: 55px;
     margin-left: -20px;

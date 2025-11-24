@@ -61,13 +61,13 @@ export function InputScore({ item, onScoreChange }: InputScoreProps) {
         } as React.CSSProperties
       }
     >
-      {/* Icône de la catégorie */}
-      <img src={item.icon} alt={`${item.category} icon`} className={styles.icon} />
+      {/* Container gauche : Icône + Catégorie */}
+      <div className={styles.categoryContainer}>
+        <img src={item.icon} alt={`${item.category} icon`} className={styles.icon} />
+        <span className={styles.category}>{item.category}</span>
+      </div>
 
-      {/* Nom de la catégorie */}
-      <span className={styles.category}>{item.category}</span>
-
-      {/* Container pour l'input et la notation */}
+      {/* Container droit : Input + notation */}
       <div className={styles.scoreContainer}>
         {/* Input contrôlé : la valeur vient de item.score (ou chaîne vide si null) */}
         <input

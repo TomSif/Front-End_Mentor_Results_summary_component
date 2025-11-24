@@ -37,7 +37,7 @@
 
   // === DESKTOP : Hauteur fixe pour alignement avec SummaryPanel ===
   @include desktop {
-    min-width: 370px;
+    width: 50%;
     max-width: 370px;
     height: 512px; // Hauteur fixe en desktop
     position: relative;

@@ -11,11 +11,11 @@
 @use '../../styles/main' as *;
 
 .inputScore {
-  // Layout: flexbox pour aligner icône, catégorie, et input
+  // Layout: flexbox avec space-between pour pousser les conteneurs aux extrémités
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: $spacing-200; // 16px entre les éléments
-  flex-wrap: nowrap; // Empêche le wrap des éléments
 
   // Background avec la couleur de fond exacte du design Figma
   background-color: var(--category-background);
@@ -37,6 +37,15 @@
   }
 }
 
+.categoryContainer {
+  // Container pour icône + catégorie
+  display: flex;
+  align-items: center;
+  gap: $spacing-200; // 16px entre icône et texte
+  flex: 1; // Prend l'espace disponible
+  min-width: 0; // Permet la compression
+}
+
 .icon {
   // Taille de l'icône
   width: 20px;
@@ -54,8 +63,11 @@
   // Couleur de la catégorie
   color: var(--category-color);
 
-  // Flex pour pousser l'input à droite
-  flex: 1;
+  // Permet au texte de se compresser et de se tronquer si nécessaire
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .scoreContainer {
